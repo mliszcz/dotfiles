@@ -1,1 +1,1 @@
-# dotfiles
+dotfiles, configurations and bootstrapping cookbook

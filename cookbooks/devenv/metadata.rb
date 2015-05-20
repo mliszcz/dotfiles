@@ -1,0 +1,7 @@
+name 'devenv'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures devenv'
+long_description 'Installs/Configures devenv'
+version '0.1.0'
