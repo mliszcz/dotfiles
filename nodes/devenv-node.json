@@ -1,0 +1,12 @@
+{
+  "name": "devenv-node",
+  "chef_environment": "_default",
+  "normal": {
+    "tags": [
+
+    ]
+  },
+  "run_list": [
+    "recipe[devenv::default]"
+  ]
+}
