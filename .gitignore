@@ -3,3 +3,5 @@ Berksfile.lock
 
 # Berkshelf vendor directory
 berks-cookbooks/
+
+.local-mode-cache

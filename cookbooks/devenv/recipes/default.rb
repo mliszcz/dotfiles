@@ -8,8 +8,13 @@ log "Welcome to Chef" do
   level :info
 end
 
-tar_extract 'https://github.com/atom/atom/archive/v0.200.0.tar.gz' do
-  target_dir '/tmp/my-atom'
-  creates '/tmp/my-atom/README.md'
-  tar_flags [ '--strip-components 1' ]
+directory "/tmp/my-atom"
+
+ark "maven3-task" do
+  url 'file:///home/michal/Downloads/apache-maven-3.3.1-bin.tar.gz'
+  path '/tmp/maven-3'
+  action :put
+  # strip_components 2
+  owner node['current_user']
+  group node['current_user']
 end

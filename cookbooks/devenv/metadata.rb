@@ -6,4 +6,4 @@ description 'Installs/Configures devenv'
 long_description 'Installs/Configures devenv'
 version '0.1.0'
 
-depends 'tar', '~> 0.6.0'
+depends 'ark', '~> 0.9.0'
