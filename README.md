@@ -1,1 +1,1 @@
-dotfiles, configurations and bootstrapping cookbook
+dotfiles, configurations and bootstrapping playbook

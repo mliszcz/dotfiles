@@ -1,3 +1,3 @@
 #!/bin/bash
 
-chef-client -z -c client.rb -N devenv-node
+ansible-playbook -v --ask-become-pass site.yml

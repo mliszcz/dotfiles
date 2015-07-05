@@ -1,0 +1,27 @@
+---
+
+# - name: install archives
+#   include: install_archive.yml
+#   vars:
+#     name: '{{item.key}}'
+#     path: '{{item.value.path}}'
+#     export_home: '{{item.value.export_home | default(False)}}'
+#     export_path: '{{item.value.export_path | default(False)}}'
+#     install_dir: '{{item.value.install_dir | default(archives_install_dir)}}'
+#     export_file: '{{item.value.export_file | default(archives_export_file)}}'
+#   with_dict: '{{install_archives}}'
+#   changed_when: False # https://github.com/ansible/ansible/issues/11197
+#
+# - name: install packages
+#   become: yes
+#   become_method: sudo
+#   # package:
+#   apt:
+#     name: '{{install_packages}}'
+#     state: latest
+
+- name: copy fancybash scripts
+  copy:
+    src: bashrc.d/
+    mode: 'u=rwx,g=rx,o=rx'
+    dest: '{{archives_install_dir}}/.bashrc.d'

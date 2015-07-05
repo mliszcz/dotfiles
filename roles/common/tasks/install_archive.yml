@@ -1,0 +1,78 @@
+---
+
+# install_archive task
+#
+# Installs compiled, packaged application and configures $PATH.
+#
+# Arguments:
+#
+# * name: unique name of the package. If there is a directory which name starts
+#         with 'name', the package is assumed to be installed already.
+#
+# * path:  path to the archive (local file or http resource).
+#
+# * export_home: (optional) name of the environment variable with archive root
+#                directory location. 'no' means that no variable will be
+#                exported.
+#
+# * export_path: (optional) directory relative to archives root directory which
+#                will be added to $PATH. 'no' means that no directory will be
+#                added.
+#
+# * install_dir: directory where packages will be placed.
+#
+# * export_file: file where env exports will be added. Should be sourced from
+#                .profile / .bashrc
+#
+
+- name: 'configure {{name}} installation'
+  set_fact:
+    package_exists: {}
+
+- name: 'check if {{name}} is installed'
+  register: package_exists
+  find:
+    paths: '{{install_dir}}'
+    patterns: '{{name}}*'
+    file_type: directory
+    recurse: no
+
+- name: 'install {{name}}'
+  when: package_exists.matched == 0
+  register: 'package_status'
+  unarchive:
+    src: '{{path}}'
+    dest: '{{install_dir}}'
+    copy: no
+    list_files: yes
+
+- name: 'prepare {{name}} path'
+  when: package_exists.matched == 0
+  set_fact:
+    package_path: '{{install_dir}}/{{package_status["files"][0] | dirname}}'
+
+- name: 'export env var with {{name}} root directory'
+  when: >
+        package_exists.matched == 0 and
+        package_path is defined and
+        export_home is defined and
+        export_home
+  lineinfile:
+    state: present
+    create: yes
+    dest: '{{export_file}}'
+    line: 'export {{export_home}}="{{package_path}}"'
+
+- name: 'add {{name}} to $PATH'
+  when: >
+        package_exists.matched == 0 and
+        package_path is defined and
+        export_path is defined and
+        export_path
+  lineinfile:
+    state: present
+    create: yes
+    dest: '{{export_file}}'
+    line: "export PATH=\"{{export_home | ternary('$', '')}}\
+          {{export_home | ternary(export_home, package_path)}}\
+          /{{export_path}}:$PATH\""

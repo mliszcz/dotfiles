@@ -1,0 +1,16 @@
+
+archives_install_dir: '/home/michal/ansible-tests'
+archives_export_file: '/home/michal/ansible-tests/bashrc.sh'
+
+install_archives:
+  bower:
+    path: /home/michal/Downloads/ansible-tests/v1.4.1.tar.gz
+    export_home: BOWER_HOME
+    export_path: bin
+  grunt:
+    path: /home/michal/Downloads/ansible-tests/v0.4.5.tar.gz
+    export_path: bin
+
+install_packages:
+  - telnet
+  - wget
