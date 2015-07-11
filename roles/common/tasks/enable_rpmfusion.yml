@@ -1,0 +1,15 @@
+---
+
+- name: enable rpmfusion {{item.key}}
+  when: ansible_distribution == 'Fedora'
+  dnf:
+    state: present
+    name: {{item.value}}
+    disable_gpg_check: no
+  with_dict:
+    free: "http://download1.rpmfusion.org/free/fedora/\
+          rpmfusion-free-release\
+          -{{andansible_distribution_major_version}}.noarch.rpm"
+    nonfree: "http://download1.rpmfusion.org/nonfree/fedora/\
+             rpmfusion-nonfree-release\
+             -{{andansible_distribution_major_version}}.noarch.rpm"
