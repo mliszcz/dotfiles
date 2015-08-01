@@ -10,8 +10,6 @@ from ansible.utils.unicode import to_bytes
 
 class ActionModule(ActionBase):
 
-    TRANSFERS_FILES = False
-
     def run(self, tmp=None, task_vars=dict()):
         ''' handler for install_archive operations '''
 
@@ -46,7 +44,10 @@ class ActionModule(ActionBase):
             task_vars=task_vars)
 
         if find.get('matched', 0):
-            return dict(changed=False, msg= name + " is already installed.")
+            return dict(
+                changed=False,
+                msg= name + " is already installed.",
+                path= find['files'][0]['path'])
 
         unarchive = self._execute_module(
             module_name='unarchive',
@@ -66,36 +67,15 @@ class ActionModule(ActionBase):
         if not files:
             return dict(failed=True, msg= "Archive is empty.")
 
-        arch_home = os.path.join(install_dir, files[0])
+        extract_root = lambda path: path.split('/')[0]
+
+        root_dir = extract_root(files[0])
+
+        if any(extract_root(f) != root_dir for f in files):
+                return dict(failed=True, msg= "Archive does not contain "
+                "single root directory.")
+
+        arch_home = os.path.join(install_dir, root_dir)
         arch_home = arch_home[:-1] if arch_home[-1] == '/' else arch_home
-
-        if export_home:
-
-            self._execute_module(
-                module_name='lineinfile',
-                module_args=dict(
-                    state= 'present',
-                    create= 'yes',
-                    dest= env_exports,
-                    line= 'export {0}="{1}"'.format(export_home, arch_home)
-                ),
-                task_vars=task_vars)
-
-        if export_path:
-
-            arch_path = ('$'+export_home) if export_home else arch_home
-
-            # FIXME proper order of exports is not enforced
-
-            self._execute_module(
-                module_name='lineinfile',
-                module_args=dict(
-                    state= 'present',
-                    create= 'yes',
-                    dest= env_exports,
-                    line= 'export PATH="{0}/{1}:$PATH"'.format(
-                    arch_path, export_path)
-                ),
-                task_vars=task_vars)
 
         return dict(changed=True, path=arch_home)
