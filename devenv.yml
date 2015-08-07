@@ -4,4 +4,31 @@
   connection: local
   gather_facts: false
   roles:
-    - common
+    # - common
+    # - dev-nodejs
+    - firefox
+
+  vars:
+
+    FSROOT: /home/michal3/ansible-tests
+    FSHOME: /home/michal3/ansible-tests/home/michal
+
+    ansible_architecture: x86_64
+
+    arch:
+      x86_64_or_i686: "{{\
+      (ansible_architecture == 'x86_64') | ternary('x86_64', 'i686') }}"
+      x86_64_or_i386: "{{\
+      (ansible_architecture == 'x86_64') | ternary('x86_64', 'i386') }}"
+      x64_or_x86: "{{\
+      (ansible_architecture == 'x86_64') | ternary('x64', 'x86') }}"
+
+    config:
+      install_dir:
+        app: /home/michal3/ansible-tests/opt # /opt
+        lib: /home/michal3/ansible-tests/usr/local/lib
+      env_exports: /home/michal3/ansible-tests/home/michal/profile.d
+
+    software:
+      nodejs:
+        version: 0.12.7

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-ansible-playbook -v --ask-become-pass site.yml
+OPTS=--ask-become-pass
+ansible-playbook -vvv site.yml
