@@ -8,6 +8,7 @@
     # - dev-nodejs
     - firefox
     - gnome
+    - bash
 
   vars:
 
@@ -15,6 +16,7 @@
     FSHOME: /home/michal3/ansible-tests/home/michal
 
     ansible_architecture: x86_64
+    ansible_distribution: Ubuntu
 
     arch:
       x86_64_or_i686: "{{\

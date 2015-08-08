@@ -1,0 +1,37 @@
+---
+## Configure bash.
+#
+
+- name: copy .bashrc
+  copy:
+    src: bashrc
+    dest: ~/.bashrc
+    force: yes
+
+- name: copy Ubuntu-specific .bashrc
+  copy:
+    src: bashrc_ubuntu
+    dest: ~/.bashrc_os_specific
+    force: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: copy .bash_profile
+  copy:
+    src: bash_profile
+    dest: ~/.bash_profile
+    force: yes
+
+- name: copy .profile
+  copy:
+    src: profile
+    dest: ~/.profile
+    force: yes
+
+- name: copy .bash_aliases
+  copy:
+    content: ''
+    dest: ~/.bash_aliases
+    force: yes
+
+- include: git-prompt.yml
+- include: pygmentize.yml

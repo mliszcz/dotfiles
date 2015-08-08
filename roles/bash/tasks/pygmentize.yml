@@ -1,0 +1,14 @@
+---
+## Install Pygments.
+# This requires python and pip.
+
+- name: install Pygments
+  command: pip install --user Pygments
+  # installs to ~/.local/bin
+
+- name: set pyg alias
+  lineinfile:
+    dest: ~/.bash_aliases
+    line: pyg() { pygmentize $1 | nl --body-numbering=a; }
+    state: present
+    create: yes

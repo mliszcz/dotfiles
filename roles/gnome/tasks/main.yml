@@ -32,3 +32,15 @@
     section: Settings
     option: gtk-application-prefer-dark-theme
     value: 1
+
+- name: ensure gnome-terminal profile exists
+  file:
+    path: ~/.gconf/apps/gnome-terminal/profiles/Default
+    state: directory
+    mode: 0755
+
+- name: configure gnome-terminal
+  command:
+    'gconftool-2 --set /apps/gnome-terminal/profiles/Default/{{item[0]}}
+    --type={{item[1]}} "{{item[2]}}"'
+  with_items: '{{gconf_settings.terminal}}'
