@@ -6,8 +6,11 @@
 # * installs addons
 # * sets preferences
 #
+# NOTE This required access to the X system!
+#
 # You have to manually enable addons
 # in Tools -> Add-ons or about:addons
+#
 #
 
 - name: create profile

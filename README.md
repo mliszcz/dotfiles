@@ -7,7 +7,7 @@ Dotfiles, configurations and bootstrapping playbook.
 * [ ] Install Atom and plugins
 * [ ] Install Deadbeef
 * [ ] Configure Bash PS1 and aliases
-* [ ] Tweak Gnome UI (replace Adwaita Dark CSS)
+* [x] Tweak Gnome UI (replace Adwaita Dark CSS)
 * [ ] Provide better fonts for Fedora
 * [x] Enable rpmfusion on Fedora
 * [ ] Set up Java dev env (JDK, Maven, STS/Eclipse)

@@ -96,16 +96,6 @@ def main():
         text = './rdf:Description/em:type',
         attr = ('./rdf:Description[@em:type]', 'em:type'),
         ns   = ns)
-    #
-    # id_element = root.find("./rdf:Description/em:id", ns)
-    #
-    # if id_element is not None:
-    #     addon_id = id_element.text
-    # else:
-    #     description_element = root.find("./rdf:Description[@em:id]", ns)
-    #
-    #     if description_element is not None:
-    #         addon_id = description_element.get('{%s}id' % ns['em'])
 
     if addon_id is None:
         module.fail_json(msg="em:id is missing in install manifest")
@@ -118,10 +108,6 @@ def main():
         text = './rdf:Description/em:unpack',
         attr = ('./rdf:Description[@em:unpack]', 'em:unpack'),
         ns   = ns)
-
-    # unpack_elem = root.find("./rdf:Description/em:unpack", ns)
-    #
-    # addon_unpack = (unpack_elem is not None) and (unpack_elem.text == 'true')
 
     addon_unpack = (addon_unpack == 'true')
 

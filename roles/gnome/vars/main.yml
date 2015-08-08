@@ -1,0 +1,25 @@
+---
+
+gnome_settings:
+  - [[org.gnome.shell.overrides, button-layout, ':minimize,maximize,close']]
+  - [[org.gnome.shell.overrides, dynamic-workspaces, 'false']]
+  - [[org.gnome.desktop.wm.preferences, num-workspaces, 1]]
+  - [[org.gnome.nautilus.window-state, maximized, 'true']]
+  - [[org.gnome.desktop.interface, gtk-im-module, 'gtk-im-context-simple']]
+  - [[org.gnome.desktop.interface, clock-show-seconds, 'true']]
+  - [[org.gnome.desktop.interface, clock-show-date, 'true']]
+  - [[org.gnome.nautilus.preferences, default-sort-order, 'mtime']]
+  - [[org.gnome.nautilus.preferences, default-folder-viewer, 'list-view']]
+  - [[org.gnome.nautilus.window-state, maximized, 'true']]
+  - [[org.gnome.shell.calendar, show-weekdate, 'true']]
+  -
+    -
+      - org.gnome.shell
+      - enabled-extensions
+      - "['alternate-tab@gnome-shell-extensions.gcampax.github.com',
+        'user-theme@gnome-shell-extensions.gcampax.github.com']"
+  -
+    -
+      - org.gnome.shell
+      - favorite-apps
+      - "['firefox.desktop', 'nautilus.desktop', 'gnome-terminal.desktop']"

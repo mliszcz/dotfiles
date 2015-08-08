@@ -1,0 +1,34 @@
+---
+## Set gnome preferences.
+#
+# TODO install weather extension
+#
+
+- name: tweak gonme settings
+  command: 'gsettings set {{item[0]}} {{item[1]}} "{{item[2]}}"'
+  with_items: '{{gnome_settings}}'
+
+- name: create local themes directory
+  file:
+    path: ~/.themes
+    state: directory
+    mode: 0755
+
+- name: clone Adwaita theme
+  command: cp -r /usr/share/themes/Adwaita ~/.themes/Adwaita-Dark
+
+- name: replace Adwaita-Dark css
+  command: >
+    cp -b ~/.themes/Adwaita-Dark/gtk-3.0/gtk-dark.css
+    ~/.themes/Adwaita-Dark/gtk-3.0/gtk.css
+
+- name: use Adwaita-Dark theme
+  command: gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-Dark'
+
+- name: enable global dark theme
+  ini_file:
+    dest: ~/.config/gtk-3.0/settings.ini
+    state: present
+    section: Settings
+    option: gtk-application-prefer-dark-theme
+    value: 1
