@@ -5,11 +5,6 @@ if [ -f /etc/bashrc ]; then
   source /etc/bashrc
 fi
 
-# Source os-specific definitions
-if [ -f ~/.bashrc_os_specific ]; then
-  source ~/.bashrc_os_specific
-fi
-
 # Editor
 if which vim >/dev/null; then
   export EDITOR=vim

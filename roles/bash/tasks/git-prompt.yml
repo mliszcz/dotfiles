@@ -2,12 +2,6 @@
 ## Set-up bash prompt.
 #
 
-- name: ensure .bashrc.d exists
-  file:
-    path: ~/.bashrc.d
-    state: directory
-    mode: 0755
-
 - name: fetch git-completion scripts
   get_url:
     url: '{{item.url}}'

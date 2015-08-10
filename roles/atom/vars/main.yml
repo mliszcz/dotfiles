@@ -1,0 +1,9 @@
+---
+
+atom_packages:
+  - language-haskell
+  - language-erlang
+  - language-elixir
+  - language-livescript
+  - minimap
+  - base16-atelierdune-dark-syntax

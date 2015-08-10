@@ -1,0 +1,14 @@
+"*":
+  welcome:
+    showOnStartup: false
+  editor:
+    invisibles: {}
+    showInvisibles: true
+    softWrap: true
+    showIndentGuide: true
+    fontSize: 15
+  core:
+    themes: [
+      "one-dark-ui"
+      "base16-atelierdune-dark-syntax"
+    ]

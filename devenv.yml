@@ -6,9 +6,10 @@
   roles:
     # - common
     # - dev-nodejs
-    - firefox
-    - gnome
-    - bash
+    # - firefox
+    # - gnome
+    # - bash
+    - atom
 
   vars:
 

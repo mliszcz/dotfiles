@@ -4,9 +4,9 @@ Dotfiles, configurations and bootstrapping playbook.
 
 ### TODO
 * [x] Install Firefox addons
-* [ ] Install Atom and plugins
+* [x] Install Atom and plugins
 * [ ] Install Deadbeef
-* [ ] Configure Bash PS1 and aliases
+* [x] Configure Bash PS1 and aliases
 * [x] Tweak Gnome UI (replace Adwaita Dark CSS)
 * [ ] Provide better fonts for Fedora
 * [x] Enable rpmfusion on Fedora

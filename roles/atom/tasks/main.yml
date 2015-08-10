@@ -1,0 +1,43 @@
+---
+## Install and configure Atom.
+#
+
+- name: download atom (ubuntu)
+  get_url:
+    url: https://atom.io/download/deb
+    dest: /tmp
+    force: yes
+  register: atom_install
+  when: ansible_distribution in ['Debian', 'Ubuntu']
+
+- name: install atom (ubuntu)
+  apt:
+    deb: '{{atom_install.dest}}'
+    state: present
+  become: yes
+  become_method: sudo
+  when: ansible_distribution in ['Debian', 'Ubuntu']
+
+- name: install atom (fedora)
+  dnf:
+    name: https://atom.io/download/rpm
+    state: present
+  become: yes
+  become_method: sudo
+  when: ansible_distribution in ['CentOS', 'Fedora']
+
+- name: install atom packages
+  command: 'apm install {{item}}'
+  with_items: '{{atom_packages}}'
+
+- name: copy configuration file
+  copy:
+    src: config.cson
+    dest: ~/.atom/config.cson
+    force: yes
+
+- name: copy styles file
+  copy:
+    src: styles.less
+    dest: ~/.atom/styles.less
+    force: yes

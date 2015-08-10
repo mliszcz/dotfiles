@@ -2,6 +2,12 @@
 ## Configure bash.
 #
 
+- name: ensure .bashrc.d exists
+  file:
+    path: ~/.bashrc.d
+    state: directory
+    mode: 0755
+
 - name: copy .bashrc
   copy:
     src: bashrc
@@ -10,8 +16,8 @@
 
 - name: copy Ubuntu-specific .bashrc
   copy:
-    src: bashrc_ubuntu
-    dest: ~/.bashrc_os_specific
+    src: bashrc-ubuntu.sh
+    dest: ~/.bashrc.d/00-bashrc-ubuntu.sh
     force: yes
   when: ansible_distribution == 'Ubuntu'
 
