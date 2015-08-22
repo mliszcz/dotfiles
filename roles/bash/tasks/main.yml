@@ -5,7 +5,7 @@
 - name: copy bash dotfiles
   copy:
     src: home/
-    dest: ~
+    dest: ~/
     force: yes
 
 - include: git-prompt.yml
