@@ -1,0 +1,70 @@
+---
+
+# Installs deadbeef.
+#
+
+- name: ensure that install directory exists
+  file:
+    path: '{{deadbeef.install_dir}}'
+    state: directory
+    mode: 0755
+
+- name: install deadbeef
+  unarchive:
+    src: '{{deadbeef.url}}'
+    dest: '{{deadbeef.install_dir}}'
+    copy: no
+
+- name: get installation directory
+  find:
+    file_type: directory
+    paths: '{{deadbeef.install_dir | expanduser}}'
+    patterns: deadbeef-*
+    recurse: no
+  register: deadbeef_install_status
+
+- name: set deadbeef facts
+  set_fact:
+    deadbeef_path: '{{deadbeef_install_status.files[0].path}}'
+    deadbeef_version: '{{deadbeef_install_status.files[0].path
+                        | basename | regex_replace("^deadbeef-(.*)$", "\\1") }}'
+
+- name: install plugins
+  unarchive:
+    src: '{{item.value.url}}'
+    dest: '{{deadbeef_path}}'
+    copy: no
+  with_dict: deadbeef.plugins
+
+- name: create configuration directory
+  file:
+    path: ~/.config/deadbeef
+    state: directory
+    mode: 0755
+
+- name: copy deadbeef configuration
+  template:
+    src: config.j2
+    dest: ~/.config/deadbeef/config
+    force: yes
+
+- name: copy hi-color icon
+  copy:
+    src: deadbeef.svg
+    dest: '{{deadbeef_path}}'
+
+- name: create desktop entry
+  ini_file:
+    dest: '~/.local/share/applications/deadbeef.desktop'
+    section: Desktop Entry
+    option: '{{item.key}}'
+    value: '{{item.value}}'
+  with_dict:
+    Type: Application
+    Version: 1.0
+    Encoding: UTF-8
+    Name: 'Deadbeef'
+    Exec: '{{deadbeef_path}}/deadbeef'
+    Icon: '{{deadbeef_path}}/deadbeef.svg'
+    Terminal: false
+    Categories: AudioVideo;Player;GTK;

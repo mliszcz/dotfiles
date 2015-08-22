@@ -5,7 +5,7 @@ Dotfiles, configurations and bootstrapping playbook.
 ### TODO
 * [x] Install Firefox addons
 * [x] Install Atom and plugins
-* [ ] Install Deadbeef
+* [x] Install Deadbeef
 * [x] Install STS/Eclipse
 * [x] Configure Bash PS1 and aliases
 * [x] Tweak Gnome UI (replace Adwaita Dark CSS)

@@ -10,7 +10,8 @@
     # - gnome
     # - bash
     # - atom
-    - eclipse
+    # - eclipse
+    - deadbeef
 
   vars:
 

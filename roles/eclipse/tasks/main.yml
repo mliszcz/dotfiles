@@ -25,7 +25,7 @@
     recurse: no
   register: sts_install_status
 
-- name: get STS release name
+- name: set STS facts
   set_fact:
     sts_path: '{{sts_install_status.files[0].path}}'
     sts_release: '{{sts_install_status.files[0].path | basename}}'
@@ -43,7 +43,7 @@
     '-Xmx': 1024m
     '-XX:MaxPermSize=': 1024m
 
-- name: create icon
+- name: create desktop entry
   ini_file:
     dest: '~/.local/share/applications/{{sts_release}}.desktop'
     section: Desktop Entry
