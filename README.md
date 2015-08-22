@@ -6,11 +6,12 @@ Dotfiles, configurations and bootstrapping playbook.
 * [x] Install Firefox addons
 * [x] Install Atom and plugins
 * [ ] Install Deadbeef
+* [x] Install STS/Eclipse
 * [x] Configure Bash PS1 and aliases
 * [x] Tweak Gnome UI (replace Adwaita Dark CSS)
 * [ ] Provide better fonts for Fedora
 * [x] Enable rpmfusion on Fedora
-* [ ] Set up Java dev env (JDK, Maven, STS/Eclipse)
+* [ ] Set up Java dev env (JDK, Maven)
 * [ ] Set up Scala dev env (Scala, SBT)
 * [ ] Set up Nodejs dev env
 * [ ] Set up Haskell dev env (GHC, Cabal, Ubuntu PPA)

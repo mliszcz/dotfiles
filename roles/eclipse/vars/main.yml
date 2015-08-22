@@ -1,0 +1,8 @@
+---
+
+sts:
+  install_dir: ~/.opt
+  workspace_dir: ~/Documents
+  url: "http://dist.springsource.com/release/STS/3.7.0.RELEASE/dist/e4.5/\
+        spring-tool-suite-3.7.0.RELEASE-e4.5-linux-gtk\
+        {{(ansible_architecture == 'x86_64')|ternary('-x86_64', '')}}.tar.gz"

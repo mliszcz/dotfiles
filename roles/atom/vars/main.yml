@@ -7,3 +7,4 @@ atom_packages:
   - language-livescript
   - minimap
   - base16-atelierdune-dark-syntax
+  - atom-beautify

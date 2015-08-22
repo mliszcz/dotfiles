@@ -1,4 +1,4 @@
-# .bashrc_os
+# .bashrc
 
 # ubuntu-specific parts of .bashrc
 

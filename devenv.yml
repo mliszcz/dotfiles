@@ -9,7 +9,8 @@
     # - firefox
     # - gnome
     # - bash
-    - atom
+    # - atom
+    - eclipse
 
   vars:
 
@@ -26,6 +27,9 @@
       (ansible_architecture == 'x86_64') | ternary('x86_64', 'i386') }}"
       x64_or_x86: "{{\
       (ansible_architecture == 'x86_64') | ternary('x64', 'x86') }}"
+      x86_64_or_: "{{\
+      (ansible_architecture == 'x86_64') | ternary('x86_64', '') }}"
+
 
     config:
       install_dir:
