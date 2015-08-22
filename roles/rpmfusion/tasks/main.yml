@@ -1,7 +1,9 @@
 ---
 
-- name: enable rpmfusion {{item.key}}
+- name: enable rpmfusion
   when: ansible_distribution == 'Fedora'
+  become: yes
+  become_method: sudo
   dnf:
     state: present
     name: {{item.value}}

@@ -2,41 +2,10 @@
 ## Configure bash.
 #
 
-- name: ensure .bashrc.d exists
-  file:
-    path: ~/.bashrc.d
-    state: directory
-    mode: 0755
-
-- name: copy .bashrc
+- name: copy bash dotfiles
   copy:
-    src: bashrc
-    dest: ~/.bashrc
-    force: yes
-
-- name: copy Ubuntu-specific .bashrc
-  copy:
-    src: bashrc-ubuntu.sh
-    dest: ~/.bashrc.d/00-bashrc-ubuntu.sh
-    force: yes
-  when: ansible_distribution == 'Ubuntu'
-
-- name: copy .bash_profile
-  copy:
-    src: bash_profile
-    dest: ~/.bash_profile
-    force: yes
-
-- name: copy .profile
-  copy:
-    src: profile
-    dest: ~/.profile
-    force: yes
-
-- name: copy .bash_aliases
-  copy:
-    content: ''
-    dest: ~/.bash_aliases
+    src: home/
+    dest: ~
     force: yes
 
 - include: git-prompt.yml
