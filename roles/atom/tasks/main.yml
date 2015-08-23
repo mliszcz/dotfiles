@@ -2,13 +2,15 @@
 ## Install and configure Atom.
 #
 
-- name: download atom (ubuntu)
+- name: download atom
   get_url:
-    url: https://atom.io/download/deb
+    url: "https://atom.io/download/\
+          {{ (ansible_distribution in ['Debian', 'Ubuntu'])
+            | ternary('deb', 'rpm') }}"
     dest: /tmp
     force: yes
   register: atom_install
-  when: ansible_distribution in ['Debian', 'Ubuntu']
+  when: ansible_distribution in ['Debian', 'Ubuntu', 'CentOS', 'Fedora']
 
 - name: install atom (ubuntu)
   apt:
@@ -19,9 +21,7 @@
   when: ansible_distribution in ['Debian', 'Ubuntu']
 
 - name: install atom (fedora)
-  dnf:
-    name: https://atom.io/download/rpm
-    state: present
+  command: 'dnf install {{atom_install.dest}}'
   become: yes
   become_method: sudo
   when: ansible_distribution in ['CentOS', 'Fedora']

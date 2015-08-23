@@ -1,7 +1,13 @@
 ---
 
 gnome_settings:
-  - [[org.gnome.shell.overrides, button-layout, ':minimize,maximize,close']]
+  # FIXME
+  # gnome 3.12
+  # - [[org.gnome.shell.overrides, button-layout, ':minimize,maximize,close']]
+  # gnome 3.16
+  - [[org.gnome.desktop.wm.preferences button-layout, 'appmenu:minimize,maximize,close']]
+  - [[org.gnome.shell.extensions.classic-overrides button-layout, 'appmenu:minimize,maximize,close']]
+  # endif
   - [[org.gnome.shell.overrides, dynamic-workspaces, 'false']]
   - [[org.gnome.desktop.wm.preferences, num-workspaces, 1]]
   - [[org.gnome.nautilus.window-state, maximized, 'true']]

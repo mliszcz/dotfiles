@@ -14,16 +14,19 @@
     state: directory
     mode: 0755
 
-- name: clone Adwaita theme
-  command: cp -r /usr/share/themes/Adwaita ~/.themes/Adwaita-Dark
+# FIXME adwaita is binary resource in 3.16
+# this is probably no longer needed
 
-- name: replace Adwaita-Dark css
-  command: >
-    cp -b ~/.themes/Adwaita-Dark/gtk-3.0/gtk-dark.css
-    ~/.themes/Adwaita-Dark/gtk-3.0/gtk.css
-
-- name: use Adwaita-Dark theme
-  command: gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-Dark'
+# - name: clone Adwaita theme
+#   command: cp -r /usr/share/themes/Adwaita ~/.themes/Adwaita-Dark
+#
+# - name: replace Adwaita-Dark css
+#   command: >
+#     cp -b ~/.themes/Adwaita-Dark/gtk-3.0/gtk-dark.css
+#     ~/.themes/Adwaita-Dark/gtk-3.0/gtk.css
+#
+# - name: use Adwaita-Dark theme
+#   command: gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-Dark'
 
 - name: enable global dark theme
   ini_file:
@@ -40,6 +43,7 @@
     mode: 0755
 
 - name: configure gnome-terminal
+# TODO http://superuser.com/questions/444896/gnome-settings-gsettings-vs-gconftool-2
   command:
     'gconftool-2 --set /apps/gnome-terminal/profiles/Default/{{item[0]}}
     --type={{item[1]}} "{{item[2]}}"'
