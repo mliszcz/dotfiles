@@ -30,21 +30,11 @@ gnome_settings:
       - favorite-apps
       - "['firefox.desktop', 'nautilus.desktop', 'gnome-terminal.desktop']"
 
-gconf_settings:
-  terminal:
-    - [[scrollback_unlimited, bool, 'true']]
-    - [[scroll_on_output, bool, 'false']]
-    - [[use_theme_colors, bool, 'false']]
-    - [[alternate_screen_scroll, bool, 'true']]
-    - [[background_color, string, '#000000000000']]
-    - [[visible_name, string, Default]]
-    - [[bold_color, string, '#000000000000']]
-    - [[foreground_color, string, '#AAAAAAAAAAAA']]
-    -
-      -
-        - palette
-        - string
-        - "#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:\
-           #34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:\
-           #555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:\
-           #72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC"
+gonme_terminal_settings:
+  - scroll-on-output: false
+  - scroll-on-keystroke: true
+  - scrollback-unlimited: true
+  - use-theme-colors: true
+  - background-color: 'rgb(0,0,0)'
+  - foreground-color: 'rgb(170,170,170)'
+  - bold-color-same-as-fg: true
