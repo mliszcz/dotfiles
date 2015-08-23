@@ -5,8 +5,8 @@ gnome_settings:
   # gnome 3.12
   # - [[org.gnome.shell.overrides, button-layout, ':minimize,maximize,close']]
   # gnome 3.16
-  - [[org.gnome.desktop.wm.preferences button-layout, 'appmenu:minimize,maximize,close']]
-  - [[org.gnome.shell.extensions.classic-overrides button-layout, 'appmenu:minimize,maximize,close']]
+  - [[org.gnome.desktop.wm.preferences, button-layout, 'appmenu:minimize,maximize,close']]
+  - [[org.gnome.shell.extensions.classic-overrides, button-layout, 'appmenu:minimize,maximize,close']]
   # endif
   - [[org.gnome.shell.overrides, dynamic-workspaces, 'false']]
   - [[org.gnome.desktop.wm.preferences, num-workspaces, 1]]
@@ -30,11 +30,11 @@ gnome_settings:
       - favorite-apps
       - "['firefox.desktop', 'nautilus.desktop', 'gnome-terminal.desktop']"
 
-gonme_terminal_settings:
-  - scroll-on-output: false
-  - scroll-on-keystroke: true
-  - scrollback-unlimited: true
-  - use-theme-colors: true
-  - background-color: 'rgb(0,0,0)'
-  - foreground-color: 'rgb(170,170,170)'
-  - bold-color-same-as-fg: true
+gnome_terminal_settings:
+  - [[scroll-on-output, 'false']]
+  - [[scroll-on-keystroke, 'true']]
+  - [[scrollback-unlimited, 'true']]
+  - [[use-theme-colors, 'true']]
+  - [[background-color, 'rgb(0,0,0)']]
+  - [[foreground-color, 'rgb(170,170,170)']]
+  - [[bold-color-same-as-fg, 'true']]

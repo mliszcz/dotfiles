@@ -4,9 +4,9 @@
 # TODO install weather extension
 #
 
-- name: tweak gonme settings
-  command: 'gsettings set {{item[0]}} {{item[1]}} "{{item[2]}}"'
-  with_items: '{{gnome_settings}}'
+# - name: tweak gonme settings
+#   command: 'gsettings set {{item[0]}} {{item[1]}} "{{item[2]}}"'
+#   with_items: '{{gnome_settings}}'
 
 - name: enable global dark theme
   ini_file:
@@ -21,14 +21,14 @@
 # /tree/src/org.gnome.Terminal.gschema.xml
 
 - name: find default gnome-terminal profile
-  command: >
-            gsettings get org.gnome.Terminal.ProfilesList default
-            | awk -F\' '{ print $2}'
+  shell: >
+        gsettings get org.gnome.Terminal.ProfilesList default
+        | awk -F\\' '{ print $2 }'
   register: terminal_default_profile
 
 - name: tweak gnome-terminal settings
   command: "gsettings set org.gnome.Terminal.Legacy.Profile:\
             /org/gnome/terminal/legacy/profiles:\
-            /:{{terminal_default_profile}}/ \
+            /:{{terminal_default_profile.stdout}}/ \
             {{item[0]}} '{{item[1]}}'"
   with_items: '{{gnome_terminal_settings}}'
