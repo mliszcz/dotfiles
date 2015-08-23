@@ -21,7 +21,9 @@
   when: ansible_distribution in ['Debian', 'Ubuntu']
 
 - name: install atom (fedora)
-  command: 'dnf install {{atom_install.dest}}'
+  dnf:
+    name: '{{atom_install.dest}}'
+    state: present
   become: yes
   become_method: sudo
   when: ansible_distribution in ['CentOS', 'Fedora']
