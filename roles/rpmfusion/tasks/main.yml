@@ -6,12 +6,12 @@
   become_method: sudo
   dnf:
     state: present
-    name: {{item.value}}
+    name: '{{item}}'
     disable_gpg_check: no
-  with_dict:
-    free: "http://download1.rpmfusion.org/free/fedora/\
-          rpmfusion-free-release\
-          -{{andansible_distribution_major_version}}.noarch.rpm"
-    nonfree: "http://download1.rpmfusion.org/nonfree/fedora/\
-             rpmfusion-nonfree-release\
-             -{{andansible_distribution_major_version}}.noarch.rpm"
+  with_items:
+    - "http://download1.rpmfusion.org/free/fedora/\
+      rpmfusion-free-release\
+      -{{ansible_distribution_major_version}}.noarch.rpm"
+    - "http://download1.rpmfusion.org/nonfree/fedora/\
+      rpmfusion-nonfree-release\
+      -{{ansible_distribution_major_version}}.noarch.rpm"
