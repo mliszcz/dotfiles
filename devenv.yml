@@ -8,10 +8,11 @@
     # - dev-nodejs
     # - firefox
     # - gnome
-    # - bash
+    - bash
     # - atom
     # - eclipse
-    - deadbeef
+    # - deadbeef
+    # - fedora-fonts
 
   vars:
 

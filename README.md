@@ -9,7 +9,7 @@ Dotfiles, configurations and bootstrapping playbook.
 * [x] Install STS/Eclipse
 * [x] Configure Bash PS1 and aliases
 * [x] Tweak Gnome UI (replace Adwaita Dark CSS)
-* [ ] Provide better fonts for Fedora
+* [x] Provide better fonts for Fedora
 * [x] Enable rpmfusion on Fedora
 * [ ] Set up Java dev env (JDK, Maven)
 * [ ] Set up Scala dev env (Scala, SBT)

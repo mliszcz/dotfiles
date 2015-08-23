@@ -1,0 +1,29 @@
+---
+
+# Configures better fonts on Fedora.
+# Reuqired rpmfusion.
+#
+
+# http://blog.andreas-haerter.com/2011/07/18/
+# tune-improve-fedora-fonts-typeface-ubuntu-like-sharp-fonts
+
+- name: install freetype-freeworld
+  become: yes
+  become_method: sudo
+  dnf:
+    state: present
+    name: freetype-freeworld
+    disable_gpg_check: yes
+
+- name: tweak gnome xsettings
+  command: 'gsettings set {{item}}'
+  with_items:
+    - org.gnome.settings-daemon.plugins.xsettings hinting 'slight'
+    - org.gnome.settings-daemon.plugins.xsettings hinting antialiasing 'rgba'
+
+- name: tweak ~/.Xresources
+  lineinfile:
+    dest: ~/.Xresources
+    regexp: ^Xft.lcdfilter:
+    line: Xft.lcdfilter: lcddefault
+    state: present

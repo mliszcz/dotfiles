@@ -6,9 +6,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Editor
-if which vim >/dev/null; then
+if which vim >/dev/null 2>&1; then
   export EDITOR=vim
-elif which vi >/dev/null; then
+elif which vi >/dev/null 2>&1; then
   export EDITOR=vi
 fi
 
