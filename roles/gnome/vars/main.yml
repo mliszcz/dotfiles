@@ -34,7 +34,7 @@ gnome_terminal_settings:
   - [[scroll-on-output, 'false']]
   - [[scroll-on-keystroke, 'true']]
   - [[scrollback-unlimited, 'true']]
-  - [[use-theme-colors, 'true']]
+  - [[use-theme-colors, 'false']]
   - [[background-color, 'rgb(0,0,0)']]
   - [[foreground-color, 'rgb(170,170,170)']]
   - [[bold-color-same-as-fg, 'true']]

@@ -2,16 +2,16 @@
 
 - hosts: 127.0.0.1
   connection: local
-  gather_facts: false
+  # gather_facts: false
   roles:
     # - common
     # - dev-nodejs
     # - firefox
     # - gnome
-    - bash
+    # - bash
     # - atom
     # - eclipse
-    # - deadbeef
+    - deadbeef
     # - fedora-fonts
 
   vars:
@@ -19,8 +19,8 @@
     FSROOT: /home/michal3/ansible-tests
     FSHOME: /home/michal3/ansible-tests/home/michal
 
-    ansible_architecture: x86_64
-    ansible_distribution: Ubuntu
+    # ansible_architecture: x86_64
+    # ansible_distribution: Ubuntu
 
     arch:
       x86_64_or_i686: "{{\

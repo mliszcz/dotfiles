@@ -19,11 +19,31 @@
   command: 'gsettings set {{item}}'
   with_items:
     - org.gnome.settings-daemon.plugins.xsettings hinting 'slight'
-    - org.gnome.settings-daemon.plugins.xsettings hinting antialiasing 'rgba'
+    - org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
 
 - name: tweak ~/.Xresources
   lineinfile:
     dest: ~/.Xresources
-    regexp: ^Xft.lcdfilter:
-    line: Xft.lcdfilter: lcddefault
+    regexp: '^Xft.lcdfilter:'
+    line: 'Xft.lcdfilter: lcddefault'
     state: present
+
+- name: ensure that fonts directory exists
+  file:
+    path: ~/.fonts
+    state: directory
+    mode: 0755
+
+- name: install ubuntu fonts
+  unarchive:
+    src: http://font.ubuntu.com/download/ubuntu-font-family-0.83.zip
+    dest: ~/.fonts
+    copy: no
+
+- name: update font cache
+  command: fc-cache -v
+
+- name: set monospace font
+  command: >
+          gsettings set org.gnome.desktop.interface
+          monospace-font-name 'Ubuntu Mono 13'

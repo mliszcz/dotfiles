@@ -4,9 +4,9 @@
 # TODO install weather extension
 #
 
-# - name: tweak gonme settings
-#   command: 'gsettings set {{item[0]}} {{item[1]}} "{{item[2]}}"'
-#   with_items: '{{gnome_settings}}'
+- name: tweak gonme settings
+  command: 'gsettings set {{item[0]}} {{item[1]}} "{{item[2]}}"'
+  with_items: '{{gnome_settings}}'
 
 - name: enable global dark theme
   ini_file:
