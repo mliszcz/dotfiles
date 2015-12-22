@@ -5,6 +5,17 @@ atom_packages:
   - language-erlang
   - language-elixir
   - language-livescript
+  - language-docker
+  - language-scala
   - minimap
   - base16-atelierdune-dark-syntax
   - atom-beautify
+  - editorconfig
+  - linter
+  - linter-eslint
+  - language-cmake
+  - language-gnuplot-atom
+  - atom-ternjs
+  - language-restructuredtext
+  - rst-preview-pandoc
+  - language-latex

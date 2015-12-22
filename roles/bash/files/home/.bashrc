@@ -5,6 +5,9 @@ if [ -f /etc/bashrc ]; then
   source /etc/bashrc
 fi
 
+# History
+export HISTCONTROL=ignoreboth
+
 # Editor
 if which vim >/dev/null 2>&1; then
   export EDITOR=vim

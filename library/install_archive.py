@@ -21,7 +21,7 @@ options:
     required: true
     default: null
     aliases: []
-  install_dir:
+  into:
     description:
       - Directory where package will be placed.
      required: true
@@ -33,5 +33,5 @@ EXAMPLES = '''
 # Downloads and extracts JDK into C(/usr/local/lib).
 - install_archive: name=jdk1.8
                    path=http://[...]/jdk-8u45-linux-x64.tar.gz
-                   install_dir=/usr/local/lib
+                   into=/usr/local/lib
 '''

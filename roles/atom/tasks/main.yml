@@ -2,31 +2,35 @@
 ## Install and configure Atom.
 #
 
-- name: download atom
-  get_url:
-    url: "https://atom.io/download/\
-          {{ (ansible_distribution in ['Debian', 'Ubuntu'])
-            | ternary('deb', 'rpm') }}"
-    dest: /tmp
-    force: yes
-  register: atom_install
-  when: ansible_distribution in ['Debian', 'Ubuntu', 'CentOS', 'Fedora']
+# - name: download atom
+#   get_url:
+#     url: "https://atom.io/download/\
+#           {{ (ansible_distribution in ['Debian', 'Ubuntu'])
+#             | ternary('deb', 'rpm') }}"
+#     dest: /tmp
+#     force: yes
+#   register: atom_install
+#   when: ansible_distribution in ['Debian', 'Ubuntu', 'CentOS', 'Fedora']
+#
+# - name: install atom (ubuntu)
+#   apt:
+#     deb: '{{atom_install.dest}}'
+#     state: present
+#   become: yes
+#   become_method: sudo
+#   when: ansible_distribution in ['Debian', 'Ubuntu']
+#
+# - name: install atom (fedora)
+#   dnf:
+#     name: '{{atom_install.dest}}'
+#     state: present
+#   become: yes
+#   become_method: sudo
+#   when: ansible_distribution in ['CentOS', 'Fedora']
 
-- name: install atom (ubuntu)
-  apt:
-    deb: '{{atom_install.dest}}'
-    state: present
-  become: yes
-  become_method: sudo
-  when: ansible_distribution in ['Debian', 'Ubuntu']
-
-- name: install atom (fedora)
-  dnf:
-    name: '{{atom_install.dest}}'
-    state: present
-  become: yes
-  become_method: sudo
-  when: ansible_distribution in ['CentOS', 'Fedora']
+# sudo add-apt-repository ppa:webupd8team/atom 
+# sudo apt-get update
+# sudo apt-get install
 
 - name: install atom packages
   command: 'apm install {{item}}'

@@ -1,0 +1,8 @@
+---
+
+- name: install nodejs
+  install_archive:
+    name: 'node'
+    # path: https://nodejs.org/dist/v0.12.7/node-v0.12.7-linux-x64.tar.gz
+    path: /home/michal3/Downloads/ansible-tests/node-v{{software.nodejs.version}}-linux-{{arch.x64_or_x86}}.tar.gz
+    into: '{{config.install_dir.app}}'
