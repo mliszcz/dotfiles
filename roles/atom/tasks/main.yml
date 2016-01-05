@@ -2,35 +2,34 @@
 ## Install and configure Atom.
 #
 
-# - name: download atom
-#   get_url:
-#     url: "https://atom.io/download/\
-#           {{ (ansible_distribution in ['Debian', 'Ubuntu'])
-#             | ternary('deb', 'rpm') }}"
-#     dest: /tmp
-#     force: yes
-#   register: atom_install
-#   when: ansible_distribution in ['Debian', 'Ubuntu', 'CentOS', 'Fedora']
-#
-# - name: install atom (ubuntu)
-#   apt:
-#     deb: '{{atom_install.dest}}'
-#     state: present
-#   become: yes
-#   become_method: sudo
-#   when: ansible_distribution in ['Debian', 'Ubuntu']
-#
-# - name: install atom (fedora)
-#   dnf:
-#     name: '{{atom_install.dest}}'
-#     state: present
-#   become: yes
-#   become_method: sudo
-#   when: ansible_distribution in ['CentOS', 'Fedora']
+- name: add repository [Ubuntu]
+  apt_repository:
+    repo: ppa:webupd8team/atom
+    update_cache: yes
+  become: yes
+  become_method: sudo
+  when: ansible_distribution in ['Ubuntu']
 
-# sudo add-apt-repository ppa:webupd8team/atom 
-# sudo apt-get update
-# sudo apt-get install
+- name: add repository [Fedora]
+  block:
+    - name: install dnf-plugins-core
+      dnf:
+        name: dnf-plugins-core
+        state: present
+    - name: enable repository
+      command: dnf copr enable helber/atom && dnf update
+  become: yes
+  become_method: sudo
+  when: ansible_distribution in ['Fedora']
+
+# TODO arch support
+
+- name: install atom
+  package:
+    name: atom
+    state: latest
+  become: yes
+  become_method: sudo
 
 - name: install atom packages
   command: 'apm install {{item}}'
