@@ -12,7 +12,7 @@ Dotfiles, configurations and bootstrapping playbook.
 * [x] Provide better fonts for Fedora
 * [x] Enable rpmfusion on Fedora
 * [ ] Configure AUR on Arch
-* [ ] Install VirtualBox
+* [ ] Install ~~VirtualBox~~ KVM + QEMU + Gnome Boxes
 * [ ] Install Docker, rkt, Vagrant
 * [ ] Set up Java dev env (JDK, Maven)
 * [ ] Set up Scala dev env (Scala, SBT)
