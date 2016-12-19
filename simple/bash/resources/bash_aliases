@@ -1,0 +1,7 @@
+#
+# ~/.bash_aliases
+#
+
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias ssh='ssh -XC -c blowfish-cbc,arcfour'

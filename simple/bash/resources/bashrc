@@ -1,0 +1,18 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+[[ -f /etc/bashrc ]] && source /etc/bashrc
+[[ -f /etc/bash.bashrc ]] && source /etc/bash.bashrc
+[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
+
+export EDITOR=nvim
+export HISTCONTROL=ignoreboth
+
+# check window size after each command
+shopt -s checkwinsize
+
+for f in ~/.bashrc.d/*; do [[ -f $f ]] && source $f; done
