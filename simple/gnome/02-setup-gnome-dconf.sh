@@ -30,11 +30,14 @@ set_key org.gnome.nautilus.window-state  maximized             'true'
 set_key org.gnome.desktop.interface      clock-show-seconds    'true'
 set_key org.gnome.desktop.interface      clock-show-date       'true'
 set_key org.gnome.desktop.interface      monospace-font-name   'Hack 13'
+set_key org.gnome.desktop.interface      gtk-theme             'Arc-Darker'
+set_key org.gnome.desktop.interface      icon-theme            'Arc'
 set_key org.gnome.nautilus.preferences   default-sort-order    'mtime'
 set_key org.gnome.nautilus.preferences   default-folder-viewer 'list-view'
 set_key org.gnome.nautilus.window-state  maximized             'true'
 set_key org.gnome.desktop.calendar       show-weekdate         'true'
 set_key org.gnome.shell                  enabled-extensions    "$ENABLED_EXTENSIONS"
 set_key org.gnome.shell                  favorite-apps         "$FAVORITE_APPS"
+set_key org.gnome.shell.extensions.user-theme     name         'Arc-Dark'
 
 set +v
