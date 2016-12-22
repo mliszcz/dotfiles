@@ -10,10 +10,17 @@
 [[ -f /etc/profile.d/vte.sh ]] && source /etc/profile.d/vte.sh
 [[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
-export EDITOR=nvim
 export HISTCONTROL=ignoreboth
 
-# check window size after each command
+if hash nvim 2>/dev/null; then
+  export EDITOR=nvim
+elif hash vim 2>/dev/null; then
+  export EDITOR=vim
+elif hash vi 2>/dev/null; then
+  export EDITOR=vi
+fi
+
+# Check window size after each command
 shopt -s checkwinsize
 
 for f in ~/.bashrc.d/*; do [[ -f $f ]] && source $f; done
