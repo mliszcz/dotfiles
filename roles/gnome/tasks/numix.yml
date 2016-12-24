@@ -1,9 +1,0 @@
-
-
-# sudo add-apt-repository ppa:numix/ppa
-# dnf copr -y enable satya164/numix
-#
-# sudo apt-get update && sudo apt-get install numix-gtk-theme
-# sudo apt-get install numix-icon-theme numix-icon-theme-circle
-#
-# pacman -S numix-themes
