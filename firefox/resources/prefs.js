@@ -17,7 +17,7 @@ user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtabpage.introShown", true);
 user_pref("browser.privatebrowsing.autostart", true);
-user_pref("browser.startup.homepage", "https://duckduckgo.com");
+user_pref("browser.startup.homepage", "https://start.duckduckgo.com");
 user_pref("browser.tabs.tabMinWidth", 128);
 user_pref("browser.tabs.warnOnClose", false);
 user_pref("browser.tabs.warnOnOpen", false);
