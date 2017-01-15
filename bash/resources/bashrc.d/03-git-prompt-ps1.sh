@@ -99,7 +99,7 @@ __update_ps1() {
   local ret=${?}
 
   export PS1=$IBlue\($User@$Host\)$Color_Off'$(git branch &>/dev/null;\
-if [ $? -eq 0 ]; then \
+if [ $? -eq 0 ] && (type -t __git_ps1 &>/dev/null); then \
   echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
   if [ "$?" -eq "0" ]; then \
     # @4 - Clean repository - nothing to commit
