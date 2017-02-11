@@ -6,8 +6,7 @@
 [[ $- != *i* ]] && return
 
 [[ -f /etc/bashrc ]] && source /etc/bashrc
-[[ -f /etc/bash.bashrc ]] && source /etc/bash.bashrc
-[[ -f /etc/profile.d/vte.sh ]] && source /etc/profile.d/vte.sh
+[[ -f /etc/profile ]] && source /etc/profile
 [[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
 export HISTCONTROL=ignoreboth
