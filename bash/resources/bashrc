@@ -19,6 +19,15 @@ elif hash vi 2>/dev/null; then
   export EDITOR=vi
 fi
 
+if hash fzf 2>/dev/null; then
+  if hash rg 2>/dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+  elif hash pt 2>/dev/null; then
+    export FZF_DEFAULT_COMMAND='pt --hidden -g ""'
+  fi
+fi
+
+
 # Check window size after each command
 shopt -s checkwinsize
 
