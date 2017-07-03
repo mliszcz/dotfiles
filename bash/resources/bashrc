@@ -9,7 +9,11 @@
 [[ -f /etc/profile ]] && source /etc/profile
 [[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=1000
+export HISTFILESIZE=100000
+shopt -s histappend
+shopt -s globstar
 
 if hash nvim 2>/dev/null; then
   export EDITOR=nvim
@@ -21,7 +25,7 @@ fi
 
 if hash fzf 2>/dev/null; then
   if hash rg 2>/dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
   elif hash pt 2>/dev/null; then
     export FZF_DEFAULT_COMMAND='pt --hidden -g ""'
   fi
