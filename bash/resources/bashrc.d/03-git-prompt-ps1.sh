@@ -6,6 +6,9 @@
 #  Bunch-o-predefined colors.  Makes reading code easier than escape sequences.
 #  I don't remember where I found this.  o_O
 
+# color table:
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+
 # Reset
 Color_Off="\[\033[0m\]"       # Text Reset
 
@@ -18,6 +21,7 @@ Blue="\[\033[0;34m\]"         # Blue
 Purple="\[\033[0;35m\]"       # Purple
 Cyan="\[\033[0;36m\]"         # Cyan
 White="\[\033[0;37m\]"        # White
+Orange="\[\033[38;5;166m\]"
 
 # Bold
 BBlack="\[\033[1;30m\]"       # Black
@@ -28,6 +32,7 @@ BBlue="\[\033[1;34m\]"        # Blue
 BPurple="\[\033[1;35m\]"      # Purple
 BCyan="\[\033[1;36m\]"        # Cyan
 BWhite="\[\033[1;37m\]"       # White
+BOrange="\[\033[1;38;5;166m\]"
 
 # Underline
 UBlack="\[\033[4;30m\]"       # Black
@@ -107,10 +112,10 @@ if [ $? -eq 0 ] && (type -t __git_ps1 &>/dev/null); then \
   else \
     # @5 - Changes to working tree
     echo "'$IRed'"$(__git_ps1 " {%s}"); \
-  fi) '$BYellow$PathShort$Color_Off'"; \
+  fi) '$BOrange$PathShort$Color_Off'"; \
 else \
   # @2 - Prompt when not in GIT repo
-    echo " '$Yellow$PathShort$Color_Off'"; \
+    echo " '$Orange$PathShort$Color_Off'"; \
     fi)''$(if [ '${ret}' -eq 0 ]; then echo " \$ "; else echo "'${IRed}' \$'${ColorOff}${IWhite}' "; fi)'
 }
 
