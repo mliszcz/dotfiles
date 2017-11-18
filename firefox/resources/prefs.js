@@ -55,3 +55,5 @@ user_pref("privacy.donottrackheader.enabled", true);
 user_pref("privacy.sanitize.migrateFx3Prefs", true);
 user_pref("signon.importedFromSqlite", true);
 user_pref("ui.key.menuAccessKeyFocuses", false);
+user_pref("widget.chrome.allow-gtk-dark-theme", true);
+user_pref("widget.content.allow-gtk-dark-theme", true);
