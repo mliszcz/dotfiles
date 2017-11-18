@@ -18,5 +18,6 @@ ln -sf $DIR/resources/bash_aliases ~/.bash_aliases
 ln -sf $DIR/resources/bashrc       ~/.bashrc
 ln -sf $DIR/resources/bashrc.d     ~/.bashrc.d
 ln -sf $DIR/resources/tmux.conf    ~/.tmux.conf
+ln -sf $DIR/resources/gitconfig    ~/.gitconfig
 
 set +v
