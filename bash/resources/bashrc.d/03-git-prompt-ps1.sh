@@ -112,10 +112,10 @@ if [ $? -eq 0 ] && (type -t __git_ps1 &>/dev/null); then \
   else \
     # @5 - Changes to working tree
     echo "'$IRed'"$(__git_ps1 " {%s}"); \
-  fi) '$BOrange$PathShort$Color_Off'"; \
+  fi) '$BYellow$PathShort$Color_Off'"; \
 else \
   # @2 - Prompt when not in GIT repo
-    echo " '$Orange$PathShort$Color_Off'"; \
+    echo " '$Yellow$PathShort$Color_Off'"; \
     fi)''$(if [ '${ret}' -eq 0 ]; then echo " \$ "; else echo "'${IRed}' \$'${ColorOff}${IWhite}' "; fi)'
 }
 
