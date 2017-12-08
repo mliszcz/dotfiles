@@ -39,3 +39,12 @@ export EXA_COLORS='uu=38;5;166:gu=38;5;166'
 shopt -s checkwinsize
 
 for f in ~/.bashrc.d/*; do [[ -f $f ]] && source $f; done
+
+if hash tmux 2>/dev/null; then
+  if [ -z "$TMUX" ]; then
+    _trap_exit() { tmux kill-session -t $$; }
+    trap _trap_exit EXIT
+    tmux new-session -s $$
+    exit
+  fi
+fi
