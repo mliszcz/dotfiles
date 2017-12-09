@@ -4,6 +4,7 @@
 [profiles]
   [[default]]
     show_titlebar = False
+    scrollbar_position = disabled
     use_theme_colors = False
     background_color = '#000000'
     foreground_color = '#aaaaaa'
