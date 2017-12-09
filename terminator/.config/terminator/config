@@ -1,0 +1,59 @@
+[global_config]
+  focus = system
+
+[profiles]
+  [[default]]
+    show_titlebar = False
+    use_theme_colors = False
+    background_color = '#000000'
+    foreground_color = '#aaaaaa'
+    use_system_font = False
+    font = Hack 14
+
+# remove bindings to not inferfere with tmux
+[keybindings]
+  zoom_in = <Ctrl>plus
+  zoom_out = <Ctrl>minus
+  zoom_normal =
+  new_tab =
+  cycle_next =
+  cycle_prev =
+  go_prev =
+  go_up =
+  go_down =
+  go_left =
+  go_right =
+  rotate_cw =
+  rotate_ccw =
+  split_horiz =
+  split_vert =
+  close_term =
+  copy = <Ctrl><Shift>C
+  paste = <Ctrl><Shift>V
+  toggle_scrollbar =
+  search =
+  close_window =
+  resize_up =
+  resize_down =
+  resize_left =
+  resize_right =
+  move_tab_right =
+  move_tab_left =
+  toggle_zoom =
+  scaled_zoom =
+  next_tab =
+  prev_tab =
+  edit_window_title =
+  edit_tab_title =
+  edit_terminal_title =
+  full_screen =
+  reset =
+  reset_clear =
+  hide_window =
+  group_all =
+  ungroup_all =
+  group_tab =
+  ungroup_tab =
+  new_window =
+  new_terminator =
+
