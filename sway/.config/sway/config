@@ -205,6 +205,8 @@ include /etc/sway/config.d/*
 
 ################################################################################
 
+border none
+
 bar {
     font Hack 11
     separator_symbol ·
