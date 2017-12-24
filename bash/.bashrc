@@ -40,11 +40,15 @@ shopt -s checkwinsize
 
 for f in ~/.bashrc.d/*; do [[ -f $f ]] && source $f; done
 
-if hash tmux 2>/dev/null; then
-  if [ -z "$TMUX" ]; then
-    _trap_exit() { tmux kill-session -t $$; }
-    trap _trap_exit EXIT
-    tmux new-session -s $$
-    exit
+if hash tty 2>/dev/null; then
+  if [[ ! `tty` =~ '/dev/tty' ]]; then
+    if hash tmux 2>/dev/null; then
+      if [[ -z "$TMUX" ]]; then
+        _trap_exit() { tmux kill-session -t $$; }
+        trap _trap_exit EXIT
+        tmux new-session -s $$
+        exit
+      fi
+    fi
   fi
 fi
