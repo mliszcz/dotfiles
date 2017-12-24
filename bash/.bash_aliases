@@ -17,3 +17,7 @@ if hash pygmentize 2>/dev/null; then
 elif hash highlight 2>/dev/null; then
   alias hl='highlight -O ansi --failsafe'
 fi
+
+# alias sway='GDK_BACKEND=wayland CLUTTER_BACKEND=wayland WLC_XWAYLAND=0 sway -dV 1>~/swaylog 2>&1'
+# alias sway='GDK_BACKEND=wayland CLUTTER_BACKEND=wayland WLC_XWAYLAND=1 sway -dV 1>~/swaylog 2>&1'
+alias sway='sway -dV 1>~/swaylog 2>&1'
