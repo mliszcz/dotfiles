@@ -20,6 +20,8 @@
 # signal
 # urgent
 
+# copy-paste friendly fontawesome icons: http://fontawesome.io/cheatsheet/
+
 # Global properties
 #
 # The top properties below are applied to every block, but can be overridden.
@@ -77,6 +79,8 @@ interval=10
 # separator=false
 
 [wifi]
+label=
+# label=
 instance=wlp3s0
 interval=10
 # separator=false
@@ -84,15 +88,17 @@ interval=10
 [bandwidth]
 #instance=eth0
 interval=5
+# command=/usr/lib/i3blocks/bandwidth | sed -e 's/IN//g;s/OUT//g'
+command=/usr/lib/i3blocks/bandwidth | sed -e 's/IN//g;s/OUT//g'
 
 # CPU usage
 #
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
-[cpu_usage]
-label=CPU
-interval=10
-min_width=CPU: 100.00%
+# [cpu_usage]
+# label=CPU
+# interval=10
+# min_width=CPU: 100.00%
 #separator=false
 
 #[load_average]
@@ -102,16 +108,23 @@ min_width=CPU: 100.00%
 #
 # The battery instance defaults to 0.
 [battery]
-label=BAT
+# label=BAT
 #label=⚡
 #instance=1
 interval=30
+command=~/.config/i3blocks/battery.sh
 
 # Date Time
 #
 [time]
+label=
+command=date '+%Y-%m-%d'
+interval=60
+
+[time]
 label=
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%H:%M:%S'
+# command=date '+%Y-%m-%d %H:%M:%S'
 interval=5
 
 # Generic media player support
