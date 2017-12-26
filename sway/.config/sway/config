@@ -205,7 +205,7 @@ include /etc/sway/config.d/*
 
 ################################################################################
 
-border none
+default_border none
 
 bar {
     font Hack 11
@@ -219,8 +219,9 @@ bar {
     }
 }
 
-bindsym Mod1+Tab workspace next
-bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Return exec terminator
+bindsym Mod1+Tab workspace next_on_output
+bindsym Mod1+Shift+Tab workspace prev_on_output
 
 # window class is not correctly set by terminator, use title for matching
 for_window [title="quicklaunch"] \
