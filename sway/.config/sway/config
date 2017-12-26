@@ -240,9 +240,9 @@ bindsym $mod+d exec terminator --title quicklaunch -e 'find \
             -type f \
             -name "*.desktop" 2>/dev/null \
                 | xargs grep -EL "Terminal=true|NoDisplay=true" \
-                    | xargs grep -h "^Exec=" \
-                        | sed -e "s/^Exec=//g;s/ %[fFuUdDnNickvm]//g" \
-                            | sort -u \
-                                | fzf --reverse --border \
-                                    | xargs swaymsg exec --'
+                | xargs grep -h "^Exec=" \
+                | sed -e "s/^Exec=//g;s/ %[fFuUdDnNickvm]//g" \
+                | sort -u \
+                | fzf --reverse --border \
+                | xargs swaymsg exec --'
 
