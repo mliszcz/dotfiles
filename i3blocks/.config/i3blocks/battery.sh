@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+# Battery status indication script for i3blocks.
+#
+# MIT License
+#
+# Copyright (c) 2018 Michal Liszcz
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+shopt -s nocasematch
+
 FA_BATTERY_FULL=
 FA_BATTERY_THREE_QUARTERS=
 FA_BATTERY_HALF=
@@ -9,67 +35,69 @@ FA_BOLT=
 FA_PLUG=
 FA_QUESTION=
 
-BATTERY_PREFIX="Battery ${BLOCK_INSTANCE:-0}: "
+BATTERY="/sys/class/power_supply/${BLOCK_INSTANCE:-BAT1}"
+ADAPTER="/sys/class/power_supply/AC"
 
-ADAPTER=`acpi -a | grep "Adapter 0"`
-BATTERY=`acpi -b | grep "$BATTERY_PREFIX"`
+mapfile -t -n 1 AC_ONLINE < $ADAPTER/online
+mapfile -t -n 1 BAT_STATUS < $BATTERY/status
+mapfile -t -n 1 BAT_ENERGY_NOW < $BATTERY/energy_now
+mapfile -t -n 1 BAT_ENERGY_FULL < $BATTERY/energy_full
+mapfile -t -n 1 BAT_POWER_NOW < $BATTERY/power_now
 
-PERCENT='([[:digit:]]{1,2})%'
-TIME='([[:digit:]]{2}:[[:digit:]]{2}):[[:digit:]]{2}'
-TEXT='[[:print:]]*'
-
-# syntax: https://sourceforge.net/p/acpiclient/code/ci/master/tree/acpi.c
-# some examples:
-# Battery 0: Discharging, 6%, 00:21:16 remaining
-# Battery 0: Charging, 6%, charging at zero rate - will never fully charge.
-# Battery 0: Charging, 6%, 01:18:29 until charged
-# Battery 0: Unknown, 99%
-
-function print-icon() (
-  shopt -s nocasematch
-  case "$1" in
+function print-icon() {
+  case "$BAT_STATUS" in
     charging)
       printf $FA_BOLT
       ;;
     discharging)
-      if (($2 < 20)); then printf $FA_BATTERY_EMPTY;
-      elif (($2 < 40)); then printf $FA_BATTERY_QUARTER;
-      elif (($2 < 60)); then printf $FA_BATTERY_HALF;
-      elif (($2 < 85)); then printf $FA_BATTERY_THREE_QUARTERS;
+      if (($1 < 20)); then printf $FA_BATTERY_EMPTY;
+      elif (($1 < 40)); then printf $FA_BATTERY_QUARTER;
+      elif (($1 < 60)); then printf $FA_BATTERY_HALF;
+      elif (($1 < 85)); then printf $FA_BATTERY_THREE_QUARTERS;
       else printf $FA_BATTERY_FULL;
       fi
       ;;
     *)
-      [[ "$ADAPTER" == *on-line* ]] && printf $FA_PLUG || printf $FA_QUESTION
+      [[ "$AC_ONLINE" == 1 ]] && printf $FA_PLUG || printf $FA_QUESTION
       ;;
   esac
-)
-
-function print-color() (
-  shopt -s nocasematch
-  if [[ "$1" == discharging ]]; then
-    if (($2 < 20)); then printf "#FF0000\n";
-    elif (($2 < 40)); then printf "#FFAE00\n";
-    elif (($2 < 60)); then printf "#FFF600\n";
-    elif (($2 < 85)); then printf "#A8FF00\n";
-    fi
-    if (($2 < 5 )); then
-      exit 33
-    fi
-  fi
-)
-
-function print-status() {
-  local STATUS PERCENT TIME
-  read STATUS PERCENT TIME
-  ICON=`print-icon "$STATUS" $PERCENT`
-  TIME=`[[ -n "$TIME" ]] && printf " ($TIME)"`
-  printf "$ICON $PERCENT%%$TIME\n"
-  printf "$ICON $PERCENT%%\n"
-  print-color "$STATUS" $PERCENT
 }
 
-echo "${BATTERY#$BATTERY_PREFIX}" \
-  | sed -Ee "s/^($TEXT), $PERCENT(, $TIME)?$TEXT$/\1 \2 \4/g" \
-  | print-status
+function print-color() {
+  if [[ "$BAT_STATUS" == discharging ]]; then
+    if (($1 < 20)); then printf "#FF0000";
+    elif (($1 < 40)); then printf "#FFAE00";
+    elif (($1 < 60)); then printf "#FFF600";
+    elif (($1 < 85)); then printf "#A8FF00";
+    fi
+  fi
+}
+
+function print-time() {
+  local ENERGY SECONDS
+  case "$BAT_STATUS" in
+    charging) ENERGY=$(($BAT_ENERGY_FULL-$BAT_ENERGY_NOW)) ;;
+    discharging) ENERGY=$BAT_ENERGY_NOW ;;
+    *) ENERGY= ;;
+  esac
+  if [[ -n $ENERGY ]] && (($BAT_POWER_NOW > 0)); then
+    SECONDS=$((60*60*$ENERGY/$BAT_POWER_NOW))
+    date -u +%H:%M -d@$SECONDS
+  fi
+}
+
+CAPACITY=$((100*$BAT_ENERGY_NOW/$BAT_ENERGY_FULL))
+ICON=$(print-icon $CAPACITY)
+TIME=$(print-time)
+COLOR=$(print-color $CAPACITY)
+
+[[ -n "$TIME" ]] && TIME=" ($TIME)"
+
+printf "$ICON $CAPACITY%%$TIME\n"
+printf "$ICON $CAPACITY%%\n"
+[[ -n "$COLOR" ]] && printf "$COLOR\n"
+
+if [[ "$BAT_STATUS" == discharging ]] && (($CAPACITY < 5)); then
+  exit 33
+fi
 
