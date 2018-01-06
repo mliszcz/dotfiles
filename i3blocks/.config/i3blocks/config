@@ -74,8 +74,9 @@ interval=30
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 #instance=wlan0
-color=#00FF00
+# color=#00FF00
 interval=10
+command=~/.config/i3blocks/iface.sh
 # separator=false
 
 [wifi]
@@ -89,7 +90,8 @@ interval=10
 #instance=eth0
 interval=5
 # command=/usr/lib/i3blocks/bandwidth | sed -e 's/IN//g;s/OUT//g'
-command=/usr/lib/i3blocks/bandwidth | sed -e 's/IN//g;s/OUT//g'
+command=/usr/lib/i3blocks/bandwidth | sed -e 's/IN//g;s/OUT//g'
+# command=/usr/lib/i3blocks/bandwidth | sed -e 's/IN//g;s/OUT//g'
 
 # CPU usage
 #
