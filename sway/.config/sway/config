@@ -206,6 +206,8 @@ include /etc/sway/config.d/*
 ################################################################################
 
 default_border none
+output * bg #323232 solid_color
+bindsym $mod+Shift+l exec swaylock -c 323232
 
 bar {
     font Hack 11
