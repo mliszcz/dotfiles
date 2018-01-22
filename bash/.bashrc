@@ -54,3 +54,5 @@ if hash tty 2>/dev/null; then
     fi
   fi
 fi
+
+hash khal 2>/dev/null && khal && printf "\n"
