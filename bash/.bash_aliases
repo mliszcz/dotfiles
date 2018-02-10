@@ -3,7 +3,7 @@
 #
 
 alias ls='ls --color=auto'
-alias ssh='ssh -XC -c blowfish-cbc,arcfour'
+alias ssh='ssh -XC'
 alias ssh-phone='/usr/bin/ssh -p 2222 -c aes128-gcm@openssh.com root@black'
 
 if hash exa 2>/dev/null; then
