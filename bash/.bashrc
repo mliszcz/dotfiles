@@ -42,7 +42,7 @@ shopt -s checkwinsize
 
 for f in ~/.bashrc.d/*; do [[ -f $f ]] && source $f; done
 
-if hash tty 2>/dev/null; then
+if hash tty 2>/dev/null && false; then
   if [[ ! `tty` =~ '/dev/tty' ]]; then
     if hash tmux 2>/dev/null; then
       if [[ -z "$TMUX" ]]; then
