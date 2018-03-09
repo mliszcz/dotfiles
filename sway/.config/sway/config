@@ -205,9 +205,33 @@ include /etc/sway/config.d/*
 
 ################################################################################
 
-default_border none
+default_border pixel 2
+hide_edge_borders both
 output * bg #323232 solid_color
 bindsym $mod+Shift+l exec swaylock -c 323232
+
+# beware as manpage specifies position as X,Y (note comma)
+output eDP-1 position 1920 0
+output HDMI-A-1 position 0 0
+
+set $wsTerm "1:"
+set $wsWeb "2:"
+set $wsMusic "3:"
+set $wsFiles "4:"
+
+    bindsym $mod+1 workspace $wsTerm
+    bindsym $mod+2 workspace $wsWeb
+    bindsym $mod+3 workspace $wsMusic
+    bindsym $mod+4 workspace $wsFiles
+    bindsym $mod+Shift+1 move container to workspace $wsTerm
+    bindsym $mod+Shift+2 move container to workspace $wsWeb
+    bindsym $mod+Shift+3 move container to workspace $wsMusic
+    bindsym $mod+Shift+4 move container to workspace $wsFiles
+
+workspace $wsTerm output HDMI-A-1
+workspace $wsWeb output HDMI-A-1
+workspace $wsMusic output HDMI-A-1
+workspace $wsFiles output HDMI-A-1
 
 bar {
     font Hack 11
@@ -248,6 +272,7 @@ bindsym $mod+d exec terminator --title quicklaunch -e 'find \
                 | sed -e "s/^Exec=//g;s/ %[fFuUdDnNickvm]//g" \
                 | { cat; \
                     echo "terminator -e cmus"; \
+                    echo "terminator -e ranger"; \
                   } \
                 | sort -u \
                 | fzf --reverse --border \
