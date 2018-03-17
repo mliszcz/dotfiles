@@ -26,8 +26,10 @@ elif hash vi 2>/dev/null; then
 fi
 
 if hash fzf 2>/dev/null; then
-  if hash rg 2>/dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+  if hash fd 2>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --hidden --follow --type f -E ".git/" -E ".svn/" .'
+  elif hash rg 2>/dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!.svn/*"'
   elif hash pt 2>/dev/null; then
     export FZF_DEFAULT_COMMAND='pt --hidden -g ""'
   fi
