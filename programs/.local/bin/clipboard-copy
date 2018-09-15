@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 if [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xclip 2>/dev/null; then
   exec xclip -in -selection clipboard
