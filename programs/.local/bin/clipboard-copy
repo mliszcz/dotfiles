@@ -1,0 +1,10 @@
+#/usr/bin/env bash
+
+if [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xclip 2>/dev/null; then
+  exec xclip -in -selection clipboard
+elif [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xsel 2>/dev/null; then
+  exec xsel --input --clipboard
+elif hash lemonade 2>/dev/null; then
+  exec lemonade copy
+fi
+
