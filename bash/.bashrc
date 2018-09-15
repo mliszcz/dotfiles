@@ -35,6 +35,17 @@ if hash fzf 2>/dev/null; then
   fi
 fi
 
+if [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xclip 2>/dev/null; then
+  export CLIPBOARD_COPY_CMD='xclip -in -selection clipboard'
+  export CLIPBOARD_PASTE_CMD='xclip -out -selection clipboard'
+elif [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xsel 2>/dev/null; then
+  export CLIPBOARD_COPY_CMD='xsel --input --clipboard'
+  export CLIPBOARD_PASTE_CMD='xsel --output --clipboard'
+elif hash lemonade 2>/dev/null; then
+  export CLIPBOARD_COPY_CMD='lemonade copy'
+  export CLIPBOARD_PASTE_CMD='lemonade paste'
+fi
+
 # keys: https://github.com/ogham/exa/blob/075fe802b49438aac8452622f69c8933f2308e23/src/style/colours.rs#L197
 # values are terminal color codes
 export EXA_COLORS='uu=38;5;166:gu=38;5;166'
