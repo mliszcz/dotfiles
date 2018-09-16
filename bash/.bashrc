@@ -41,9 +41,10 @@ if [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xclip 2>/dev/null; then
 elif [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xsel 2>/dev/null; then
   export CLIPBOARD_COPY_CMD='xsel --input --clipboard'
   export CLIPBOARD_PASTE_CMD='xsel --output --clipboard'
-elif hash lemonade 2>/dev/null; then
-  export CLIPBOARD_COPY_CMD='lemonade copy'
-  export CLIPBOARD_PASTE_CMD='lemonade paste'
+elif [[ -n "$SSH_CLIENT" ]] && hash lemonade 2>/dev/null; then
+  LEMONADE_SERVER=$(cut -d' ' -f1 <<< $SSH_CLIENT)
+  export CLIPBOARD_COPY_CMD="lemonade copy --host $LEMONADE_SERVER"
+  export CLIPBOARD_PASTE_CMD="lemonade paste --host $LEMONADE_SERVER"
 fi
 
 # keys: https://github.com/ogham/exa/blob/075fe802b49438aac8452622f69c8933f2308e23/src/style/colours.rs#L197
