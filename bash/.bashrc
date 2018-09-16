@@ -7,9 +7,10 @@
 
 [[ -f /etc/bashrc ]] && source /etc/bashrc
 [[ -f /etc/profile ]] && source /etc/profile
-[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
 [[ -d ~/.local/bin ]] && export PATH=$PATH:~/.local/bin
+
+[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=1000
