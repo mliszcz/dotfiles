@@ -36,13 +36,18 @@ if hash fzf 2>/dev/null; then
   fi
 fi
 
-if [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xclip 2>/dev/null; then
+function is_session_local_x11() { [ "$XDG_SESSION_TYPE" = 'x11' ]; }
+function is_session_remote_x11 { [ -n "$SSH_CLIENT" ] && [ -n "$DISPLAY" ]; }
+function is_session_x11 { is_session_local_x11 || is_session_remote_x11; }
+function is_session_ssh { [ -n "$SSH_CLIENT" ]; }
+
+if is_session_x11 && hash xclip 2>/dev/null; then
   export CLIPBOARD_COPY_CMD='xclip -in -selection clipboard'
   export CLIPBOARD_PASTE_CMD='xclip -out -selection clipboard'
-elif [[ "$XDG_SESSION_TYPE" = 'x11' ]] && hash xsel 2>/dev/null; then
+elif is_session_x11 && hash xsel 2>/dev/null; then
   export CLIPBOARD_COPY_CMD='xsel --input --clipboard'
   export CLIPBOARD_PASTE_CMD='xsel --output --clipboard'
-elif [[ -n "$SSH_CLIENT" ]] && hash lemonade 2>/dev/null; then
+elif is_session_ssh && hash lemonade 2>/dev/null; then
   LEMONADE_SERVER=$(cut -d' ' -f1 <<< $SSH_CLIENT)
   export CLIPBOARD_COPY_CMD="lemonade copy --host $LEMONADE_SERVER"
   export CLIPBOARD_PASTE_CMD="lemonade paste --host $LEMONADE_SERVER"
