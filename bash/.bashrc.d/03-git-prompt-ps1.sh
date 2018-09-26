@@ -36,5 +36,4 @@ function __update_ps1() {
 
 export GIT_PS1_SHOWDIRTYSTATE=
 export GIT_PS1_SHOWUNTRACKEDFILES=
-export PS1='$(__update_ps1 "\u" "\H" "\w")'
 
