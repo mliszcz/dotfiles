@@ -1,6 +1,3 @@
-#
-# ~/.bash_aliases
-#
 
 alias ls='ls --color=auto'
 alias ssh='ssh -XC'
