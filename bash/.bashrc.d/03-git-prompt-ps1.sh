@@ -14,7 +14,7 @@ function __update_ps1() {
 
   local PS="${COL_BLUE}($USER@$HOST)${COL_OFF} "
 
-  if git branch &>/dev/null && type -t __git_ps1 &>/dev/null; then
+  if git branch &>/dev/null && type __git_ps1 &>/dev/null; then
     if [[ -z $(git status --porcelain 2>/dev/null) ]]; then
       PS+="${COL_GREEN}$(__git_ps1 '(%s)')${COL_OFF} "
     else
