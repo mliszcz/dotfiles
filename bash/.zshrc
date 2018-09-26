@@ -23,3 +23,5 @@ export PS1='$(__update_ps1 "%%n" "%%M" "%%~")'
 
 export SAVEHIST=$HISTSIZE
 
+bindkey -v
+
