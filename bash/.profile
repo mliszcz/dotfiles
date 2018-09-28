@@ -7,6 +7,8 @@
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 
+export LESS='-W -i'
+
 if hash nvim 2>/dev/null; then
   export EDITOR=nvim
 elif hash vim 2>/dev/null; then
