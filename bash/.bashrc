@@ -11,6 +11,8 @@ shopt -s histappend
 shopt -s globstar
 shopt -s checkwinsize
 
+export HISTFILE=~/.histfile
+
 export PS1='$(__update_ps1 "\u" "\H" "\w")'
 
 hash khal 2>/dev/null && khal && printf "\n"
