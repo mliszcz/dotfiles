@@ -233,6 +233,10 @@ workspace $wsWeb output HDMI-A-1
 workspace $wsMusic output HDMI-A-1
 workspace $wsFiles output HDMI-A-1
 
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    tap enabled
+}
+
 bar {
     font Hack 11
     separator_symbol ·
