@@ -13,12 +13,16 @@ if [[ -n "$ZSH_VERSION" ]]; then
   }
 fi
 
-COL_BLUE=$(__esc_seq '\033[0;94m')
-COL_GREEN=$(__esc_seq '\033[0;32m')
-COL_RED=$(__esc_seq '\033[0;91m')
-COL_YELLOW=$(__esc_seq '\033[0;33m')
-COL_BOLD_YELLOW=$(__esc_seq '\033[0;1;33m')
-COL_OFF=$(__esc_seq '\033[0m')
+COL_BLUE=$(__esc_seq '\033[94m')
+COL_GREEN=$(__esc_seq '\033[32m')
+COL_RED=$(__esc_seq '\033[91m')
+COL_YELLOW=$(__esc_seq '\033[33m')
+COL_BOLD=$(__esc_seq '\033[1m')
+COL_OFF=$(__esc_seq '\033[39m')
+
+# this should be 21, but vte expects 22
+# https://github.com/kovidgoyal/kitty/issues/226
+COL_BOLD_OFF=$(__esc_seq '\033[22m')
 
 unset -f __esc_seq
 
@@ -36,7 +40,7 @@ function __update_ps1() {
     else
       PS+="${COL_RED}$(__git_ps1 '{%s}')${COL_OFF} "
     fi
-    PS+="${COL_BOLD_YELLOW}$DIR${COL_OFF} "
+    PS+="${COL_YELLOW}${COL_BOLD}$DIR${COL_BOLD_OFF}${COL_OFF} "
   else
     PS+="${COL_YELLOW}$DIR${COL_OFF} "
   fi
