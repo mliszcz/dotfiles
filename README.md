@@ -36,5 +36,5 @@ VENV=~/.local/share/khal-khard-vdirsyncer
 mkdir -p $VENV
 virtualenv $VENV
 $VENV/bin/pip install khal khard vdirsyncer
-ln -s ~/.local/share/khal-khard-vdirsyncer/bin/{khal,ikhal,khard,vdirsyncer} ~/.local/bin/
+ln -fs ~/.local/share/khal-khard-vdirsyncer/bin/{khal,ikhal,khard,vdirsyncer} ~/.local/bin/
 ```
