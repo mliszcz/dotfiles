@@ -17,21 +17,6 @@ unsetopt autocd
 unsetopt beep
 setopt promptsubst
 
-function __vi_mode_ps1 {
-  if [[ "$KEYMAP" = vicmd ]]; then
-    echo -ne '%{\033[1;39m%}:%{\033[22;39m%}'
-  else
-    echo -ne '%{\033[1;31m%}+%{\033[22;39m%}'
-  fi
-}
-
-export PS1='$(__vi_mode_ps1)$(__update_ps1 "%n" "%M" "%~")'
-
-if [[ "$COLORTERM" = truecolor ]]; then
-  export PS1=$(echo -ne '%{\033[3m%}')"$PS1"
-  function preexec { echo -ne '\033[23m' }
-fi
-
 # history ---------------------------------------------------------------------
 
 export HISTSIZE=100000
@@ -67,6 +52,23 @@ unsetopt recexact
 bindkey '^j' autosuggest-execute
 bindkey '^?' backward-delete-char # fix backspace behavior in vi normal mode
 bindkey '^[[3~' delete-char       # fix delete behavior in vi normal mode
+
+# prompt ----------------------------------------------------------------------
+
+function __vi_mode_ps1 {
+  if [[ "$KEYMAP" = vicmd ]]; then
+    echo -ne '%{\033[1;39m%}:%{\033[22;39m%}'
+  else
+    echo -ne '%{\033[1;31m%}+%{\033[22;39m%}'
+  fi
+}
+
+export PS1='$(__vi_mode_ps1)$(__update_ps1 "%n" "%M" "%~")'
+
+if [[ "$COLORTERM" = truecolor ]]; then
+  export PS1=$(echo -ne '%{\033[3m%}')"$PS1"
+  function preexec { echo -ne '\033[23m' }
+fi
 
 # vi mode ---------------------------------------------------------------------
 
