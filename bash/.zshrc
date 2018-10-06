@@ -6,88 +6,93 @@
 
 for f in ~/.shellrc.d/*{.sh,.zsh}; do [[ -r $f ]] && source $f; done
 
+zmodload -i zsh/complist
+
 autoload -Uz compinit
 compinit
 
-# do I need this?
-zstyle ':completion:*' use-compctl false
+# options ---------------------------------------------------------------------
+
+unsetopt autocd
+unsetopt beep
+setopt promptsubst
+
+export PS1='$(__update_ps1 "%n" "%M" "%~")'
+
+if [[ "$COLORTERM" = truecolor ]]; then
+  export PS1=$(echo -ne '%{\033[3m%}')"$PS1"
+  function preexec { echo -ne '\033[23m' }
+fi
+
+# history ---------------------------------------------------------------------
 
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
-export HISTFILESIZE=100000 # check what it is
+export HISTFILESIZE=$HISTSIZE
 export HISTFILE=~/.histfile
 
-zmodload -i zsh/complist
-
-# use LS_COLORS (dircolors -s)
-zstyle ':completion:*' list-colors ''
-
-# enable parameter expansion in PS1
-setopt promptsubst
-
-setopt histverify
-setopt appendhistory incappendhistory sharehistory
+setopt appendhistory
+unsetopt histbeep
 setopt histignorealldups
 setopt histignorespace
-setopt nobeep nohistbeep autocd
+setopt histverify
+setopt incappendhistory
+setopt sharehistory
 
-# why git completion misses commits
+# completion ------------------------------------------------------------------
 
-# setopt bashautolist
-setopt recexact
-unsetopt automenu
-unsetopt menucomplete
-setopt completeinword
-setopt alwaystoend
-# setopt listambiguous
-# for some reason <tab> still cycles e.g. through options in ps
-#
-export PS1=$(echo -ne '%{\033[3m%}')'$(__update_ps1 "%n" "%M" "%~")'
-function preexec { echo -ne '\033[23m' }
-
+zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' menu false
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' insert-tab false
 
-# TODO gray text after prediction
+setopt alwaystoend
+setopt autolist
+unsetopt automenu
+setopt completeinword
+unsetopt listambiguous
+unsetopt menucomplete
+unsetopt recexact
 
-autoload predict-on predict-off
-zle -N predict-on
-zle -N predict-off
-# predict-on
+# bindings --------------------------------------------------------------------
 
-# (1) https://superuser.com/questions/476532/how-can-i-make-zshs-vi-mode-behave-more-like-bashs-vi-mode
-bindkey '^?' backward-delete-char
-bindkey '^[[3~' delete-char
+bindkey '^j' autosuggest-execute
+bindkey '^?' backward-delete-char # fix backspace behavior in vi normal mode
+bindkey '^[[3~' delete-char       # fix delete behavior in vi normal mode
 
-# from (1)
-vi-search-fix() {
+# vi mode ---------------------------------------------------------------------
+
+bindkey -v
+
+# https://superuser.com/questions/476532/how-can-i-make-zshs-vi-mode-behave-more-like-bashs-vi-mode
+function __vi_search_fix {
   zle vi-cmd-mode
   zle .vi-history-search-backward
 }
 
-zle -N vi-search-fix
-bindkey -M viins '\e/' vi-search-fix
-
-bindkey -v
+zle -N __vi_search_fix
+bindkey -M viins '\e/' __vi_search_fix
 
 # https://superuser.com/questions/361335/how-to-change-the-terminal-cursor-from-box-to-line
 # http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
-function zle-keymap-select {
-  if [ "$TERM" = "xterm-256color" ] || true; then
-    if [ $KEYMAP = vicmd ]; then
-      # blinking block
-      echo -ne "\e[2 q"
+
+if [[ "$COLORTERM" = truecolor ]]; then
+
+  function __vi_reset_cursor {
+    echo -ne "\e[2 q" # solid, block
+  }
+
+  function __vi_change_cursor {
+    if [[ "$KEYMAP" = vicmd ]]; then
+      __vi_reset_cursor
     else
-      # blinking bar
-      echo -ne "\e[6 q"
+      echo -ne "\e[6 q" # solid, bar
     fi
-  fi
-}
+  }
 
-function zle-line-finish {
-  echo -ne "\e[2 q"
-}
+  zle -N zle-keymap-select __vi_change_cursor
+  zle -N zle-line-init __vi_change_cursor
+  zle -N zle-line-finish __vi_reset_cursor
 
+fi
 
-zle -N zle-keymap-select
-zle -N zle-line-init zle-keymap-select
-zle -N zle-line-finish
