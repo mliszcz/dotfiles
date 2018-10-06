@@ -17,7 +17,15 @@ unsetopt autocd
 unsetopt beep
 setopt promptsubst
 
-export PS1='$(__update_ps1 "%n" "%M" "%~")'
+function __vi_mode_ps1 {
+  if [[ "$KEYMAP" = vicmd ]]; then
+    echo -ne '%{\033[1;39m%}:%{\033[22;39m%}'
+  else
+    echo -ne '%{\033[1;31m%}+%{\033[22;39m%}'
+  fi
+}
+
+export PS1='$(__vi_mode_ps1)$(__update_ps1 "%n" "%M" "%~")'
 
 if [[ "$COLORTERM" = truecolor ]]; then
   export PS1=$(echo -ne '%{\033[3m%}')"$PS1"
@@ -76,23 +84,25 @@ bindkey -M viins '\e/' __vi_search_fix
 # https://superuser.com/questions/361335/how-to-change-the-terminal-cursor-from-box-to-line
 # http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
 
-if [[ "$COLORTERM" = truecolor ]]; then
-
-  function __vi_reset_cursor {
+function __vi_reset_cursor {
+  zle reset-prompt # update status in PS1
+  if [[ "$COLORTERM" = truecolor ]]; then
     echo -ne "\e[2 q" # solid, block
-  }
+  fi
+}
 
-  function __vi_change_cursor {
+function __vi_change_cursor {
+  zle reset-prompt # update status in PS1
+  if [[ "$COLORTERM" = truecolor ]]; then
     if [[ "$KEYMAP" = vicmd ]]; then
-      __vi_reset_cursor
+      echo -ne "\e[2 q" # solid, block
     else
       echo -ne "\e[6 q" # solid, bar
     fi
-  }
+  fi
+}
 
-  zle -N zle-keymap-select __vi_change_cursor
-  zle -N zle-line-init __vi_change_cursor
-  zle -N zle-line-finish __vi_reset_cursor
-
-fi
+zle -N zle-keymap-select __vi_change_cursor
+zle -N zle-line-init __vi_change_cursor
+zle -N zle-line-finish __vi_reset_cursor
 
