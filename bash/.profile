@@ -4,9 +4,6 @@
 
 [[ -d ~/.local/bin ]] && export PATH=$PATH:~/.local/bin
 
-export HISTSIZE=100000
-export HISTFILESIZE=100000
-
 export LESS='-W -i'
 
 if hash nvim 2>/dev/null; then
