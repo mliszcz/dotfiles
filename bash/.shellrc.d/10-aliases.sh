@@ -8,7 +8,7 @@ if hash exa 2>/dev/null; then
   alias tree='exa --tree --long --all --group --sort=modified -I=".git|.svn"'
 else
   alias ll='ls -l -t --almost-all --human-readable --literal --reverse'
-  alias tree='tree -apug -I ".git|.svn"'
+  alias tree='tree -a -I ".git|.svn"'
 fi
 
 if hash pygmentize 2>/dev/null; then
