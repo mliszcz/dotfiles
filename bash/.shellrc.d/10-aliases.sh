@@ -4,9 +4,11 @@ alias ssh='ssh -XC'
 alias ssh-phone='/usr/bin/ssh -p 2222 -c aes128-gcm@openssh.com root@black'
 
 if hash exa 2>/dev/null; then
-  alias ll='exa -lag --git'
+  alias ll='exa --long --all --group --git --sort=modified'
+  alias tree='exa --tree --long --all --group --sort=modified -I=".git|.svn"'
 else
-  alias ll='ls -lAhF --color=always | tail -n +2'
+  alias ll='ls -l -t --almost-all --human-readable --literal --reverse'
+  alias tree='tree -apug -I ".git|.svn"'
 fi
 
 if hash pygmentize 2>/dev/null; then
