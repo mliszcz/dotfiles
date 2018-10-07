@@ -4,7 +4,15 @@
 
 [[ ! -o interactive ]] && return
 
-for f in ~/.shellrc.d/pre/*(.zsh|.sh); do [[ -r $f ]] && source $f; done
+function __source_dir {
+  local HAS_NULLGLOB=
+  [[ -o nullglob ]] || HAS_NULLGLOB=1
+  setopt nullglob
+  for f in $1/*{.sh,.zsh}; do [[ -r $f ]] && source $f; done
+  [[ -z "$HAS_NULLGLOB" ]] && unsetopt nullglob
+}
+
+__source_dir ~/.shellrc.d/pre
 
 zmodload -i zsh/complist
 
@@ -108,5 +116,9 @@ zle -N zle-keymap-select __vi_change_cursor
 zle -N zle-line-init __vi_change_cursor
 zle -N zle-line-finish __vi_reset_cursor
 
-for f in ~/.shellrc.d/post/*(.zsh|.sh); do [[ -r $f ]] && source $f; done
+# post scripts ----------------------------------------------------------------
+
+__source_dir ~/.shellrc.d/post
+
+unset -f __source_dir
 
