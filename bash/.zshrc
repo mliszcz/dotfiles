@@ -4,7 +4,7 @@
 
 [[ ! -o interactive ]] && return
 
-for f in ~/.shellrc.d/*{.sh,.zsh}; do [[ -r $f ]] && source $f; done
+for f in ~/.shellrc.d/pre/*(.zsh|.sh); do [[ -r $f ]] && source $f; done
 
 zmodload -i zsh/complist
 
@@ -107,4 +107,6 @@ function __vi_change_cursor {
 zle -N zle-keymap-select __vi_change_cursor
 zle -N zle-line-init __vi_change_cursor
 zle -N zle-line-finish __vi_reset_cursor
+
+for f in ~/.shellrc.d/post/*(.zsh|.sh); do [[ -r $f ]] && source $f; done
 

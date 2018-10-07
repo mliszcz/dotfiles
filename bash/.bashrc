@@ -4,7 +4,7 @@
 
 [[ $- != *i* ]] && return
 
-for f in ~/.shellrc.d/*{.sh,.bash}; do [[ -f $f ]] && source $f; done
+for f in ~/.shellrc.d/pre/*@(.bash|.sh); do [[ -r $f ]] && source $f; done
 
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
