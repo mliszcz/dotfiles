@@ -39,6 +39,3 @@ elif [[ -n "$SSH_CLIENT" ]] && hash lemonade 2>/dev/null; then
   export CLIPBOARD_PASTE_CMD="lemonade paste --host $LEMONADE_SERVER"
 fi
 
-# keys: https://github.com/ogham/exa/blob/075fe802b49438aac8452622f69c8933f2308e23/src/style/colours.rs#L197
-# values are terminal color codes
-export EXA_COLORS='uu=38;5;166:gu=38;5;166'

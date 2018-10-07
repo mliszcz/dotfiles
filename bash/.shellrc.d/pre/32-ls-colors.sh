@@ -6,7 +6,7 @@
 function __update_ls_colors {
 
   local KINDS=(\
-    'di=34;1' # blue, bold
+    'di=94;1' # blue, bold (bright to match default vte behavior)
     'ln=36'   # cyan
     'pi=33'   # yellow
     'bd=33;1' # yellow, bold
@@ -79,4 +79,10 @@ function __update_ls_colors {
 export LS_COLORS="$(__update_ls_colors)"
 
 unset -f __update_ls_colors
+
+# override di with close match from 8-bit palette (+bold)
+# as exa does not support 4-bit bright foreground colors
+# https://github.com/ogham/exa/issues/347
+
+export EXA_COLORS='di=1;38;5;111:uu=38;5;166:gu=38;5;166'
 
