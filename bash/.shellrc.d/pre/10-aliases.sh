@@ -4,10 +4,10 @@ alias ssh='ssh -XC'
 alias ssh-phone='/usr/bin/ssh -p 2222 -c aes128-gcm@openssh.com root@black'
 
 if hash exa 2>/dev/null; then
-  alias ll='exa --long --all --group --git --sort=modified'
-  alias tree='exa --tree --long --all --group --sort=modified -I=".git|.svn"'
+  alias ll='exa --long --classify --all --group --git --sort=name'
+  alias tree='exa --tree --long --classify --all --group --sort=name -I=".git|.svn"'
 else
-  alias ll='ls -l -t --almost-all --human-readable --literal --reverse'
+  alias ll='ls -l --classify --almost-all --human-readable --literal --reverse'
   alias tree='tree -a -I ".git|.svn"'
 fi
 
