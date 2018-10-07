@@ -9,10 +9,10 @@ function __update_ls_colors {
     'di=94;1' # blue, bold (bright to match default vte behavior)
     'ln=36'   # cyan
     'pi=33'   # yellow
-    'bd=33;1' # yellow, bold
-    'cd=33;1' # yellow, bold
+    'bd=93;1' # yellow, bold (bright to match vte)
+    'cd=93;1' # yellow, bold (bright to match vte)
     'so=31'   # red
-    'ex=32;1' # green, bold
+    'ex=92;1' # green, bold (bright to match vte)
   )
 
   local FILE_IMMEDIATE=(\
@@ -57,7 +57,7 @@ function __update_ls_colors {
     .class .elc .hi .o .pyc)
 
   local TYPES=(
-    ${FILE_IMMEDIATE[@]/%/'=33;1;4'}  # yellow, bold, underline
+    ${FILE_IMMEDIATE[@]/%/'=38;5;221;1;4'}  # yellow, bold, underline
     ${FILE_IMAGE[@]/%/'=38;5;133'}    # fixed 133
     ${FILE_VIDEO[@]/%/'=38;5;135'}    # fixed 135
     ${FILE_MUSIC[@]/%/'=38;5;92'}     # fixed 92
@@ -84,5 +84,5 @@ unset -f __update_ls_colors
 # as exa does not support 4-bit bright foreground colors
 # https://github.com/ogham/exa/issues/347
 
-export EXA_COLORS='di=1;38;5;111:uu=38;5;166:gu=38;5;166'
+export EXA_COLORS='di=1;38;5;111:bd=1;38;5;221:cd=1;38;5;221:ex=1;38;5;76:uu=38;5;166:gu=38;5;166'
 

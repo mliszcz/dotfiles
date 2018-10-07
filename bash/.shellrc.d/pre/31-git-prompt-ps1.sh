@@ -17,6 +17,7 @@ COL_BLUE=$(__esc_seq '\033[94m')
 COL_GREEN=$(__esc_seq '\033[32m')
 COL_RED=$(__esc_seq '\033[91m')
 COL_YELLOW=$(__esc_seq '\033[33m')
+COL_YELLOW_B=$(__esc_seq '\033[93m')
 COL_BOLD=$(__esc_seq '\033[1m')
 COL_OFF=$(__esc_seq '\033[39m')
 
@@ -40,7 +41,7 @@ function __update_ps1() {
     else
       PS+="${COL_RED}$(__git_ps1 '{%s}')${COL_OFF} "
     fi
-    PS+="${COL_YELLOW}${COL_BOLD}$DIR${COL_BOLD_OFF}${COL_OFF} "
+    PS+="${COL_YELLOW_B}${COL_BOLD}$DIR${COL_BOLD_OFF}${COL_OFF} "
   else
     PS+="${COL_YELLOW}$DIR${COL_OFF} "
   fi
