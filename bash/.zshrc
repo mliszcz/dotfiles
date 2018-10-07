@@ -63,15 +63,18 @@ bindkey '^[[3~' delete-char       # fix delete behavior in vi normal mode
 
 # prompt ----------------------------------------------------------------------
 
-function __vi_mode_ps1 {
+function __update_ps1_vi_mode {
+  local STATUS="$?"
   if [[ "$KEYMAP" = vicmd ]]; then
     echo -ne '%{\033[1;39m%}:%{\033[22;39m%}'
   else
     echo -ne '%{\033[1;31m%}+%{\033[22;39m%}'
   fi
+  (exit $STATUS) # propagate $? to __update_ps1
+  __update_ps1 "$@"
 }
 
-export PS1='$(__vi_mode_ps1)$(__update_ps1 "%n" "%M" "%~")'
+export PS1='$(__update_ps1_vi_mode "%n" "%M" "%~")'
 
 if [[ "$COLORTERM" = truecolor ]]; then
   export PS1=$(echo -ne '%{\033[3m%}')"$PS1"
