@@ -46,5 +46,7 @@ visual_bell:
 dynamic_title: true
 
 key_bindings:
-  - { key: Return, mods: Control, chars: "\x1b[?ccr" }
+  - { key: V,      mods: Control|Shift, action: Paste      }
+  - { key: C,      mods: Control|Shift, action: Copy       }
+  - { key: Return, mods: Control,       chars: "\x1b[?ccr" }
 
