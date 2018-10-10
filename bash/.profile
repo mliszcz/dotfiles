@@ -4,7 +4,7 @@
 
 [[ -d ~/.local/bin ]] && export PATH=$PATH:~/.local/bin
 
-export LESS='-W -i'
+export LESS='-W -i -R'
 
 if hash nvim 2>/dev/null; then
   export EDITOR=nvim
