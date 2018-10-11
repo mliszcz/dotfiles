@@ -61,6 +61,8 @@ bindkey '^j' autosuggest-execute
 bindkey '^[[?ccr' autosuggest-execute # custom code for C-<CR>
 bindkey '^?' backward-delete-char # fix backspace behavior in vi normal mode
 bindkey '^[[3~' delete-char       # fix delete behavior in vi normal mode
+bindkey -M viins '^k' up-line-or-history
+bindkey -M viins '^j' down-line-or-history
 
 # prompt ----------------------------------------------------------------------
 
