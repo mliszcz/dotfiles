@@ -97,27 +97,38 @@ bindkey -M viins '\e/' __vi_search_fix
 # https://superuser.com/questions/361335/how-to-change-the-terminal-cursor-from-box-to-line
 # http://lynnard.me/blog/2014/01/05/change-cursor-shape-for-zsh-vi-mode/
 
-function __vi_reset_cursor {
-  zle reset-prompt # update status in PS1
-  if [[ "$COLORTERM" = truecolor ]]; then
-    echo -ne "\e[2 q" # solid, block
-  fi
-}
+if [[ "$COLORTERM" = truecolor ]]; then
 
-function __vi_change_cursor {
-  zle reset-prompt # update status in PS1
-  if [[ "$COLORTERM" = truecolor ]]; then
+  function __vi_reset_cursor {
+    echo -ne "\e[2 q" # solid, block
+  }
+
+  function __vi_change_cursor {
     if [[ "$KEYMAP" = vicmd ]]; then
       echo -ne "\e[2 q" # solid, block
     else
       echo -ne "\e[6 q" # solid, bar
     fi
-  fi
-}
+  }
 
-zle -N zle-keymap-select __vi_change_cursor
-zle -N zle-line-init __vi_change_cursor
-zle -N zle-line-finish __vi_reset_cursor
+  function __vi_change_cursor_and_reset_ps1 {
+    zle reset-prompt
+    __vi_change_cursor
+  }
+
+  zle -N zle-keymap-select __vi_change_cursor_and_reset_ps1
+  zle -N zle-line-init __vi_change_cursor
+  zle -N zle-line-finish __vi_reset_cursor
+
+else
+
+  function __vi_change_cursor_and_reset_ps1 {
+    zle reset-prompt
+  }
+
+  zle -N zle-keymap-select __vi_change_cursor_and_reset_ps1
+
+fi
 
 # post scripts ----------------------------------------------------------------
 
