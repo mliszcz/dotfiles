@@ -27,6 +27,21 @@ COL_BOLD_OFF=$(__esc_seq '\033[22m')
 
 unset -f __esc_seq
 
+# proper solution is: git rev-parse --is-inside-work-tree &>/dev/null
+# 15 times faster (on slow hdd) solution is below:
+function __is_git_repository {
+  [[ -d .git \
+  || -d ../.git \
+  || -d ../../.git \
+  || -d ../../../.git \
+  || -d ../../../../.git \
+  || -d ../../../../../.git \
+  || -d ../../../../../../.git \
+  || -d ../../../../../../../.git \
+  || -d ../../../../../../../../.git \
+  || -d ../../../../../../../../../.git ]]
+}
+
 function __update_ps1() {
   local USER="$1"
   local HOST="$2"
@@ -35,7 +50,7 @@ function __update_ps1() {
 
   local PS="${COL_BLUE}($USER@$HOST)${COL_OFF} "
 
-  if git branch &>/dev/null && type __git_ps1 &>/dev/null; then
+  if __is_git_repository && type __git_ps1 &>/dev/null; then
     if [[ -z $(git status --porcelain 2>/dev/null) ]]; then
       PS+="${COL_GREEN}$(__git_ps1 '(%s)')${COL_OFF} "
     else
