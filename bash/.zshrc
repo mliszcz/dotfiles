@@ -71,8 +71,7 @@ function __update_ps1_vi_mode {
   else
     echo -ne '%{\033[1;31m%}+%{\033[22;39m%}'
   fi
-  (exit $STATUS) # propagate $? to __update_ps1
-  __update_ps1 "$@"
+  __update_ps1 "$@" "$STATUS"
 }
 
 export PS1='$(__update_ps1_vi_mode "%n" "%M" "%~")'

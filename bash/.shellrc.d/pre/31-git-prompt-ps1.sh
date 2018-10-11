@@ -28,10 +28,10 @@ COL_BOLD_OFF=$(__esc_seq '\033[22m')
 unset -f __esc_seq
 
 function __update_ps1() {
-  local STATUS="$?"
   local USER="$1"
   local HOST="$2"
   local DIR="$3"
+  local STATUS="${4:-$?}"
 
   local PS="${COL_BLUE}($USER@$HOST)${COL_OFF} "
 
