@@ -1,0 +1,22 @@
+[server]
+hosts = 0.0.0.0:5232
+
+[auth]
+type = None
+
+[storage]
+filesystem_folder = ~/.local/share/radicale
+hook = find \
+    -name .git \
+    -type d \
+    -execdir bash -c ' \
+        git branch &>/dev/null \
+        && echo "recording: $(pwd)" \
+        && git add -A \
+        && (git diff --cached --quiet || git commit -m "autocommit")' \
+    \; \
+    -prune
+
+[web]
+type = internal
+# none
