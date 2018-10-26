@@ -1,0 +1,20 @@
+[default]
+timedelta = 14d
+highlight_event_days = True
+
+[highlight_days]
+color = light red
+
+[calendars]
+
+[[calendar_local]]
+path = ~/.local/share/radicale/collection-root/*/calendar
+type = discover
+readonly = True
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
