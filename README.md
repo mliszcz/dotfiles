@@ -24,17 +24,10 @@ Bash autocompletion scripts are usually bundled with the `git` package:
 
 If necessary, manually fix these symlinks in `~/.bashrc.d`.
 
-## `khal` (CalDAV) and `khard` (CardDAV)
+## Calendar and contacts
 
-These are available in AUR, but can be installed with `pip` as well, provided
-that following packages are present:
+Data is stored locally, but can be accessed via CalDAV/CardDav with `radicale`.
 
-`python-virtualenv`, `libxml2`, `libxslt`, `lxml`, `zlib`
+* Install packages: `radicale`, `khal`, `khard`, `todoman`
+* Create data dirs: `~/.local/share/radicale/collection-root/$USER/{calendar,contacts,tasks}`
 
-```bash
-VENV=~/.local/share/khal-khard-vdirsyncer
-mkdir -p $VENV
-virtualenv $VENV
-$VENV/bin/pip install khal khard vdirsyncer
-ln -fs ~/.local/share/khal-khard-vdirsyncer/bin/{khal,ikhal,khard,vdirsyncer} ~/.local/bin/
-```
