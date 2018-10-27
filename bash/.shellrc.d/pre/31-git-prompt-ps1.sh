@@ -42,6 +42,10 @@ function __is_git_repository {
   || -d ../../../../../../../../../.git ]]
 }
 
+function __is_git_repository {
+  git branch &>/dev/null
+}
+
 function __update_ps1() {
   local USER="$1"
   local HOST="$2"
