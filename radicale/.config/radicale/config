@@ -18,5 +18,4 @@ hook = find \
     -prune
 
 [web]
-type = internal
-# none
+type = None
