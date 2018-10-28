@@ -12,6 +12,9 @@ font:
     family: Hack
   size: 14.0
 
+# font seems larger than 14pt in kitty
+# https://github.com/jwilm/alacritty/issues/1501 maybe?
+
 colors:
 
   primary:
@@ -48,5 +51,5 @@ dynamic_title: true
 key_bindings:
   - { key: V,      mods: Control|Shift, action: Paste      }
   - { key: C,      mods: Control|Shift, action: Copy       }
-  - { key: Return, mods: Control,       chars: "\x1b[?ccr" }
+  - { key: Return, mods: Control,       chars: "\x1bPtmux;\x1b\x1b[?ccr\x1b\\" }
 
