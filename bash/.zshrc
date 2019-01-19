@@ -83,6 +83,20 @@ if [[ "$COLORTERM" = truecolor ]]; then
   function preexec { echo -ne '\033[23m' }
 fi
 
+
+# jump to directory -----------------------------------------------------------
+
+__alt_c_fd='fd --absolute-path --type d "."'
+export FZF_ALT_C_COMMAND=(
+  '[[ "$PWD" = "$HOME"* ]]'
+  " && $__alt_c_fd " '"$HOME"'
+  " || { $__alt_c_fd " '"$PWD"' "; $__alt_c_fd " '"$HOME" }'
+)
+export FZF_ALT_C_OPTS="--tiebreak=end,length,index"
+
+bindkey '^G' fzf-cd-widget
+
+
 # vi mode ---------------------------------------------------------------------
 
 bindkey -v
