@@ -138,3 +138,4 @@ __source_dir ~/.shellrc.d/post
 
 unset -f __source_dir
 
+hash khal 2>/dev/null && khal && printf "\n"
