@@ -1,18 +1,4 @@
 
-# Below is a copypaste from /etc/sway/config. My settings are at the end of this
-# file. I cannot just `include /etc/sway/config` because sway-bar configuration
-# cannot be overwritten.
-
-############################### /etc/sway/config ###############################
-
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -22,19 +8,36 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term urxvt
+set $term kitty
 # Your preferred application launcher
-set $menu dmenu_run
+# Note: it's recommended that you pass the final command to sway
+set $menu dmenu_path | dmenu | xargs swaymsg exec
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg #000000 solid_color
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+#
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 #
@@ -61,7 +64,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+Shift+q kill
 
     # start your launcher
-    bindsym $mod+d exec $menu
+    # bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -73,8 +76,8 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exit
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -114,16 +117,16 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -171,16 +174,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
 
     # ditto, with arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
 
     # return to default mode
     bindsym Return mode "default"
@@ -188,70 +191,26 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-# bar {
-#     position top
-#     colors {
-#         statusline #ffffff
-#         background #323232
-#         inactive_workspace #32323200 #32323200 #5c5c5c
-#     }
-# }
-
 include /etc/sway/config.d/*
 
-################################################################################
+###############################################################################
+
+include ~/.config/sway/swaybar
 
 default_border pixel 2
 hide_edge_borders both
-output * bg #323232 solid_color
-bindsym $mod+Shift+l exec swaylock -c 323232
+# bindsym $mod+Shift+l exec swaylock -c 323232
 
-# beware as manpage specifies position as X,Y (note comma)
-output eDP-1 position 1920 0
-output HDMI-A-1 position 0 0
+# output eDP-1 position 1920 0
+# output HDMI-A-1 position 0 0
 
-set $wsTerm "1:"
-set $wsWeb "2:"
-set $wsMusic "3:"
-set $wsFiles "4:"
-
-    bindsym $mod+1 workspace $wsTerm
-    bindsym $mod+2 workspace $wsWeb
-    bindsym $mod+3 workspace $wsMusic
-    bindsym $mod+4 workspace $wsFiles
-    bindsym $mod+Shift+1 move container to workspace $wsTerm
-    bindsym $mod+Shift+2 move container to workspace $wsWeb
-    bindsym $mod+Shift+3 move container to workspace $wsMusic
-    bindsym $mod+Shift+4 move container to workspace $wsFiles
-
-workspace $wsTerm output HDMI-A-1
-workspace $wsWeb output HDMI-A-1
-workspace $wsMusic output HDMI-A-1
-workspace $wsFiles output HDMI-A-1
-
-input "2:7:SynPS/2_Synaptics_TouchPad" {
+input "*" {
+    dwt enabled
     tap enabled
+    tap_button_map lrm
+    natural_scroll disabled
 }
 
-bar {
-    font Hack 11
-    separator_symbol ·
-    status_command i3blocks
-    position top
-    colors {
-        statusline #ffffff
-        background #323232
-        focused_workspace #7ca8c9 #285577 #ffffff
-        active_workspace #7ca8c9 #292939 #cccccc
-        inactive_workspace #7c7c7c #232323 #7c7c7c
-    }
-}
-
-bindsym $mod+Return exec terminator
 bindsym Mod1+Tab workspace next_on_output
 bindsym Mod1+Shift+Tab workspace prev_on_output
 
@@ -262,23 +221,9 @@ for_window [title="quicklaunch"] \
     floating_maximum_size 900 x 400, \
     border none
 
-bindsym $mod+d exec terminator --title quicklaunch -e 'find \
-        /usr/share/applications \
-        /usr/local/share/applications \
-        ~/.local/share/applications/ \
-        /usr/lib/libreoffice/share/xdg/ \
-            -mindepth 1 \
-            -maxdepth 1 \
-            -type f \
-            -name "*.desktop" 2>/dev/null \
-                | xargs grep -EL "Terminal=true|NoDisplay=true" \
-                | xargs grep -h "^Exec=" \
-                | sed -e "s/^Exec=//g;s/ %[fFuUdDnNickvm]//g" \
-                | { cat; \
-                    echo "terminator -e cmus"; \
-                    echo "terminator -e ranger"; \
-                  } \
-                | sort -u \
-                | fzf --reverse --border \
-                | xargs swaymsg exec --'
+# bindsym $mod+d exec kitty --title quicklaunch ~/.config/sway/launcher.sh
+bindsym $mod+d exec terminator --title quicklaunch -e ~/.config/sway/launcher.sh
 
+# exec --no-startup-id ~/.config/sway/dynamic-workspace-name.sh
+
+# xwayland disable

@@ -1,0 +1,13 @@
+bar {
+    font Hack 11
+    separator_symbol ·
+    status_command i3blocks
+    position top
+    colors {
+        statusline #ffffff
+        background #323232
+        focused_workspace #7ca8c9 #285577 #ffffff
+        active_workspace #7ca8c9 #292939 #cccccc
+        inactive_workspace #7c7c7c #232323 #7c7c7c
+    }
+}
