@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_config
+  xmlns="http://openbox.org/3.4/rc"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="/etc/xdg/openbox/rc.xml" xpointer="xpointer(*/*)"/>
+
+<!-- ====================================================================== -->
+
+<keyboard>
+
+  <xi:include
+    href="/etc/xdg/openbox/rc.xml"
+    xpointer="xmlns(rc=http://openbox.org/3.4/rc)xpointer(*/rc:keyboard/*)"/>
+
+  <keybind key="W-Return">
+    <action name="Execute">
+      <command>kitty</command>
+    </action>
+  </keybind>
+
+</keyboard>
+
+</openbox_config>
