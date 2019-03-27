@@ -21,9 +21,17 @@ if hash imv 2>/dev/null; then
   alias imv='imv -d'
 fi
 
-# alias sway='GDK_BACKEND=wayland CLUTTER_BACKEND=wayland WLC_XWAYLAND=0 sway -dV 1>~/swaylog 2>&1'
-# alias sway='GDK_BACKEND=wayland CLUTTER_BACKEND=wayland WLC_XWAYLAND=1 sway -dV 1>~/swaylog 2>&1'
-alias sway='sway -dV 1>~/swaylog 2>&1'
+alias swayland='\
+  GDK_BACKEND=wayland \
+  CLUTTER_BACKEND=wayland \
+  QT_QPA_PLATFORM=wayland-egl \
+  QT_WAYLAND_FORCE_DPI=physical \
+  ECORE_EVAS_ENGINE=wayland_egl \
+  ELM_ENGINE=wayland_egl \
+  SDL_VIDEODRIVER=wayland \
+  _JAVA_AWT_WM_NONREPARENTING=1 \
+  KITTY_ENABLE_WAYLAND=1 \
+  sway'
 
 # For some reason kitty sets TERMINFO to a directory with only xterm-kitty entry.
 # If tmux is started within kitty, TERM is changed to tmux-256color.
