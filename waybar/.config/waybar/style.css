@@ -1,0 +1,76 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Hack, DejaVu Sans Mono, Arial;
+  font-size: 15px;
+  min-height: 0;
+}
+
+#waybar {
+  background: rgba(50, 50, 50, 0.5);
+  color: #BBBBBB;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background: transparent;
+  color: white;
+  border-top: 2px solid transparent;
+}
+
+#workspaces button.focused {
+  color: rgb(246, 201, 169);
+  border-top: 2px solid rgb(246, 201, 169);
+}
+
+#mode {
+  background: darkred;
+}
+
+@keyframes blink {
+  to {
+    color: red;
+  }
+}
+
+#pulseaudio.muted {
+  color: orange;
+}
+
+#network.disconnected {
+  color: orange;
+}
+
+#battery.charging {
+  color: chartreuse;
+}
+
+#custom-disk.warning,
+#battery.warning:not(.charging) {
+  color: orange;
+}
+
+#custom-disk.critical,
+#battery.critical:not(.charging) {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@define-color col_border_solid rgba(120, 120, 120, 1);
+@define-color col_border_trans rgba(120, 120, 120, 0);
+
+#waybar > box:nth-child(2) > box:nth-child(3) > * > label {
+  padding: 0 15px;
+}
+
+#waybar > box:nth-child(2) > box:nth-child(3) > *:not(:first-child) > label {
+  background-image:
+    linear-gradient(@col_border_trans, @col_border_solid 45%, @col_border_solid 55%, @col_border_trans)
+  ;
+  background-size:1px 20%;
+  background-position:0 50%;
+  background-repeat:no-repeat;
+}

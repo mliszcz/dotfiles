@@ -195,7 +195,8 @@ include /etc/sway/config.d/*
 
 ###############################################################################
 
-include ~/.config/sway/swaybar
+# include ~/.config/sway/swaybar
+include ~/.config/sway/waybar
 
 default_border pixel 2
 hide_edge_borders both
