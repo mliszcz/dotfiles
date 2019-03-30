@@ -29,11 +29,11 @@ output * bg #000000 solid_color
 #
 # Example configuration:
 #
-exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' \
+#               resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -199,12 +199,11 @@ include ~/.config/sway/swaybar
 
 default_border pixel 2
 hide_edge_borders both
-# bindsym $mod+Shift+l exec swaylock -c 323232
 
 # output eDP-1 position 1920 0
 # output HDMI-A-1 position 0 0
 
-input "*" {
+input "2:7:SynPS/2_Synaptics_TouchPad" {
     dwt enabled
     tap enabled
     tap_button_map lrm
@@ -227,3 +226,19 @@ bindsym $mod+d exec terminator --title quicklaunch -e ~/.config/sway/launcher.sh
 # exec --no-startup-id ~/.config/sway/dynamic-workspace-name.sh
 
 # xwayland disable
+
+bindsym $mod+Escape exec "swaylock -f -c 000000; sleep 1; pkill -USR1 swayidle"
+
+exec swayidle \
+    timeout 0 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    timeout 10 'pgrep swaylock && swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
