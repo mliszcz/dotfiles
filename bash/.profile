@@ -37,5 +37,8 @@ elif [[ -n "$SSH_CLIENT" ]] && hash lemonade 2>/dev/null; then
   LEMONADE_SERVER=$(cut -d' ' -f1 <<< $SSH_CLIENT)
   export CLIPBOARD_COPY_CMD="lemonade copy --host $LEMONADE_SERVER"
   export CLIPBOARD_PASTE_CMD="lemonade paste --host $LEMONADE_SERVER"
+else
+  export CLIPBOARD_COPY_CMD=":"
+  export CLIPBOARD_PASTE_CMD=":"
 fi
 
