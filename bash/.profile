@@ -32,7 +32,15 @@ if [[ "$XDG_SESSION_TYPE" = 'x11' ]] || \
   elif hash xsel 2>/dev/null; then
     export CLIPBOARD_COPY_CMD='xsel --input --clipboard'
     export CLIPBOARD_PASTE_CMD='xsel --output --clipboard'
+  else
+    export CLIPBOARD_COPY_CMD=":"
+    export CLIPBOARD_PASTE_CMD=":"
   fi
+elif [[ -n "$WAYLAND_DISPLAY" ]] \
+  && hash wl-copy 2>/dev/null \
+  && hash wl-paste 2>/dev/null; then
+  export CLIPBOARD_COPY_CMD='wl-copy'
+  export CLIPBOARD_PASTE_CMD='wl-paste'
 elif [[ -n "$SSH_CLIENT" ]] && hash lemonade 2>/dev/null; then
   LEMONADE_SERVER=$(cut -d' ' -f1 <<< $SSH_CLIENT)
   export CLIPBOARD_COPY_CMD="lemonade copy --host $LEMONADE_SERVER"
