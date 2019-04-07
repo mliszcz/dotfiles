@@ -46,11 +46,14 @@
 }
 
 #custom-disk.warning,
+#custom-battery.warning,
 #battery.warning:not(.charging) {
   color: orange;
 }
 
+#temperature.critical,
 #custom-disk.critical,
+#custom-battery.critical,
 #battery.critical:not(.charging) {
   animation-name: blink;
   animation-duration: 1s;

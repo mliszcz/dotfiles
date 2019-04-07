@@ -13,7 +13,11 @@
         "temperature",
         "custom/battery",
         "clock"],
+    "sway/workspaces": {
+        "tooltip": false
+    },
     "sway/mode": {
+        "tooltip": false,
         "format": " {}",
         "max-length": 15
     },
@@ -73,8 +77,7 @@
     "temperature": {
         "tooltip": false,
         "critical-threshold": 50,
-        "format": " {temperatureC}°C",
-        "format-critical": "<span color='red'> {temperatureC}°C</span>"
+        "format": " {temperatureC}°C"
     },
     "backlight": {
         "tooltip": false,
@@ -101,7 +104,7 @@
         "tooltip": false,
         "interval": 30,
         "format": "{}",
-        "exec": "~/.config/i3blocks/battery.sh"
+        "exec": "~/.config/waybar/battery.sh"
     },
     "clock": {
         "tooltip": false,
