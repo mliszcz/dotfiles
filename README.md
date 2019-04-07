@@ -31,3 +31,10 @@ Data is stored locally, but can be accessed via CalDAV/CardDav with `radicale`.
 * Install packages: `radicale`, `khal`, `khard`, `todoman`
 * Create data dirs: `~/.local/share/radicale/collection-root/$USER/{calendar,contacts,tasks}`
 
+# GnuPG
+
+~/.gnupg permissions may need to be changed:
+
+```bash
+chmod 0700 ~/.gnupg
+```
