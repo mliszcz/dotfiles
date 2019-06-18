@@ -23,6 +23,10 @@
   border-top: 2px solid rgb(246, 201, 169);
 }
 
+#window {
+  padding-left: 20px;
+}
+
 #mode {
   background: darkred;
 }
