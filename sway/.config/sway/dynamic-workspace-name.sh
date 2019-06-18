@@ -6,6 +6,5 @@ stdbuf -o0 swaymsg -m --raw -t subscribe '["window"]' \
   | xargs -n 1 -I% sh -c "swaymsg -t get_tree | jq --unbuffered --raw-output '%'" \
   | ~/.config/sway/application-to-icon.sh \
   | xargs -n 3 -- printf "\"rename workspace number %s to '%s: %s'\"\n" \
-  | xargs -n 1 -I% sh -c "sleep 1.0s; echo '\"%\"'" \
   | tee /dev/stderr \
   | xargs -n 1 -- swaymsg

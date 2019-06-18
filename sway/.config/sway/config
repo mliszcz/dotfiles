@@ -224,9 +224,10 @@ for_window [title="quicklaunch"] \
 # bindsym $mod+d exec kitty --title quicklaunch ~/.config/sway/launcher.sh
 bindsym $mod+d exec terminator --title quicklaunch -e ~/.config/sway/launcher.sh
 
-# exec --no-startup-id ~/.config/sway/dynamic-workspace-name.sh
+exec --no-startup-id ~/.config/sway/dynamic-workspace-name.sh
 
 # xwayland disable
+xwayland enable
 
 bindsym $mod+Escape exec "swaylock -f -c 000000; sleep 1; pkill -USR1 swayidle"
 
@@ -243,3 +244,5 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+bindsym $mod+x exec killall -SIGUSR1 waybar
