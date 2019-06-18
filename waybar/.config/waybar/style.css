@@ -2,7 +2,7 @@
   border: none;
   border-radius: 0;
   font-family: Hack, DejaVu Sans Mono, Arial;
-  font-size: 15px;
+  font-size: 14px;
   min-height: 0;
 }
 
@@ -41,7 +41,7 @@
   color: orange;
 }
 
-#battery.charging {
+#battery.charging:not(.full) {
   color: chartreuse;
 }
 
@@ -70,10 +70,10 @@
 }
 
 #waybar > box:nth-child(2) > box:nth-child(3) > *:not(:first-child) > label {
-  background-image:
-    linear-gradient(@col_border_trans, @col_border_solid 45%, @col_border_solid 55%, @col_border_trans)
-  ;
-  background-size:1px 20%;
-  background-position:0 50%;
-  background-repeat:no-repeat;
+  /* background-image: */
+  /*   linear-gradient(@col_border_trans, @col_border_solid 45%, @col_border_solid 55%, @col_border_trans) */
+  /* ; */
+  /* background-size:1px 20%; */
+  /* background-position:0 50%; */
+  /* background-repeat:no-repeat; */
 }
