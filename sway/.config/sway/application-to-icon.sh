@@ -18,4 +18,5 @@ exec sed --unbuffered -e '
   s/writer//gI
   s/impress//gI
   s/thunderbird//gI
+  s/file-roller//gI
   s/Chromium//gI'
