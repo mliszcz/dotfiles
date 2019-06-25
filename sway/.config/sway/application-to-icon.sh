@@ -3,8 +3,11 @@
 exec sed --unbuffered -e '
   s/kitty//gI
   s/terminator//gI
+  s/Alacritty//gI
   s/cmus//gI
   s/ranger//gI
+  s/pcmanfm//gI
+  s/org.gnome.nautilus//gI
   s/Firefox//gI
   s/mpv//gI
   s/imv//gI
