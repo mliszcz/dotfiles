@@ -204,30 +204,36 @@ hide_edge_borders both
 # output eDP-1 position 1920 0
 # output HDMI-A-1 position 0 0
 
-input "2:7:SynPS/2_Synaptics_TouchPad" {
+input type:touchpad {
     dwt enabled
     tap enabled
     tap_button_map lrm
     natural_scroll disabled
 }
 
+input type:keyboard {
+    xkb_layout pl
+    xkb_options caps:escape
+}
+
+
 bindsym Mod1+Tab workspace next_on_output
 bindsym Mod1+Shift+Tab workspace prev_on_output
 
-# window class is not correctly set by terminator, use title for matching
 for_window [title="quicklaunch"] \
     floating enable, \
     floating_minimum_size 900 x 400, \
     floating_maximum_size 900 x 400, \
     border none
 
-# bindsym $mod+d exec kitty --title quicklaunch ~/.config/sway/launcher.sh
-bindsym $mod+d exec terminator --title quicklaunch -e ~/.config/sway/launcher.sh
+# bindsym $mod+d exec kitty --class quicklaunch ~/.config/sway/launcher.sh
+# bindsym $mod+d exec terminator --title quicklaunch -e ~/.config/sway/launcher.sh
+bindsym $mod+d exec alacritty --title quicklaunch -e ~/.config/sway/launcher.sh
 
 exec --no-startup-id ~/.config/sway/dynamic-workspace-name.sh
 
-# xwayland disable
-xwayland enable
+xwayland disable
+# xwayland enable
 
 bindsym $mod+Escape exec "swaylock -f -c 000000; sleep 1; pkill -USR1 swayidle"
 
@@ -246,3 +252,6 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 bindsym $mod+x exec killall -SIGUSR1 waybar
+
+bindswitch lid:on output eDP-1 laptop disable
+bindswitch lid:off output eDP-1 enable
