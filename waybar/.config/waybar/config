@@ -1,4 +1,5 @@
 {
+    "_vim_": { "modeline": "/* vim: set filetype=json ts=4 sw=4: */" },
     "layer": "top",
     "position": "top",
     "height": 24,
