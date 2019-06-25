@@ -13,8 +13,8 @@ find \
     | xargs grep -h "^Exec=" \
     | sed -e "s/^Exec=//g;s/ %[fFuUdDnNickvm]//g" \
     | { cat; \
-        echo "terminator -e cmus"; \
-        echo "terminator -e ranger"; \
+        echo "kitty --class cmus cmus"; \
+        echo "kitty --class ranger ranger"; \
       } \
     | sort -u \
     | fzf --reverse --border \
