@@ -40,7 +40,7 @@ elif [[ -n "$WAYLAND_DISPLAY" ]] \
   && hash wl-copy 2>/dev/null \
   && hash wl-paste 2>/dev/null; then
   export CLIPBOARD_COPY_CMD='wl-copy'
-  export CLIPBOARD_PASTE_CMD='wl-paste'
+  export CLIPBOARD_PASTE_CMD='wl-paste --no-newline'
 elif [[ -n "$SSH_CLIENT" ]] && hash lemonade 2>/dev/null; then
   LEMONADE_SERVER=$(cut -d' ' -f1 <<< $SSH_CLIENT)
   export CLIPBOARD_COPY_CMD="lemonade copy --host $LEMONADE_SERVER"
