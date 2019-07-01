@@ -217,8 +217,8 @@ input type:keyboard {
 }
 
 
-bindsym Mod1+Tab workspace next_on_output
-bindsym Mod1+Shift+Tab workspace prev_on_output
+bindsym Mod1+Tab workspace back_and_forth
+bindsym Mod1+Shift+Tab workspace back_and_forth
 
 for_window [title="quicklaunch"] \
     floating enable, \
