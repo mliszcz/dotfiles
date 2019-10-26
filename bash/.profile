@@ -3,6 +3,7 @@
 #
 
 [[ -d ~/.local/bin ]] && export PATH=$PATH:~/.local/bin
+[[ -d ~/go/bin ]] && export PATH=$PATH:~/go/bin
 
 export LESS='-W -i -R'
 
