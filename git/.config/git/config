@@ -1,6 +1,7 @@
 [user]
     name = mliszcz
     email = liszcz.michal@gmail.com
+    signingkey = 5993608F4067ACEEDBCD8DBCF78257566E89E52A
 
 [pager]
     log = /usr/share/git/diff-highlight/diff-highlight | less -RFX
@@ -22,3 +23,9 @@
     old = red
     new = green
     whitespace = red reverse
+
+[commit]
+    gpgSign = true
+
+[push]
+    gpgSign = if-asked
