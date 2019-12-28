@@ -25,7 +25,6 @@
     whitespace = red reverse
 
 [commit]
-    gpgSign = true
 
 [push]
     gpgSign = if-asked
