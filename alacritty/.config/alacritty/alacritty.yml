@@ -5,8 +5,6 @@ window:
     y: 2
   decorations: full
 
-tabspaces: 4
-
 font:
   normal:
     family: Hack
