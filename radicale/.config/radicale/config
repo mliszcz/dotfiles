@@ -2,7 +2,7 @@
 hosts = 0.0.0.0:5232
 
 [auth]
-type = None
+type = none
 
 [storage]
 filesystem_folder = ~/.local/share/radicale
@@ -18,4 +18,4 @@ hook = find \
     -prune
 
 [web]
-type = None
+type = internal
