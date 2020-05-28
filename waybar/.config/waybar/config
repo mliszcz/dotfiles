@@ -101,6 +101,7 @@
         },
         "format": "{icon} {capacity:02d}%",
         "format-alt": "{icon} {time}",
+        "format-time": "{H}:{M:02d}",
         "format-charging": " {capacity:02d}%",
         "format-charging-full": "",
         "format-icons": ["", "", "", "", ""],
