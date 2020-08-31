@@ -1,3 +1,5 @@
+shell:
+  program: fish
 
 window:
   padding:
