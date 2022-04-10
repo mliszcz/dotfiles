@@ -14,9 +14,11 @@ exec sed --unbuffered -e '
   s/zathura//gI
   s/deluge//gI
   s/gimp//gI
-  s/calc//gI
-  s/writer//gI
-  s/impress//gI
+  s/libreoffice-calc//gI
+  s/libreoffice-writer//gI
+  s/libreoffice-impress//gI
+  s/gedit//gI
   s/thunderbird//gI
   s/file-roller//gI
+  s/org.qutebrowser.qutebrowser//gI
   s/Chromium//gI'
