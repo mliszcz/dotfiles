@@ -10,6 +10,10 @@ set fish_cursor_visual      block
 
 fzf_key_bindings
 
-function ll
-    command exa --long --classify --all --group --git --sort=name
-end
+alias ll='exa --long --classify --all --group --git --sort=name'
+alias tree='exa --tree --long --classify --all --group --sort=name -I=".git|.svn"'
+alias cat='bat'
+
+# CTRL-f completes and executes the autosuggestion.
+bind -s -M insert \ce forward-char
+bind -s -M insert \cf forward-char execute
