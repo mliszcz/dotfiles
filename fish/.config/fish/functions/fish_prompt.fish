@@ -27,11 +27,15 @@ function fish_prompt
         set_color normal
     end
 
+    set_color brblack
+    printf ' (%.3fs)' (math $CMD_DURATION / 1000)
+    set_color normal
+
     if test $last_status -ne 0
         set_color brred
+        echo -n " [$last_status] \$ "
+        set_color normal
+    else
+        echo -n ' $ '
     end
-
-    echo -n ' $ '
-
-    set_color normal
 end
