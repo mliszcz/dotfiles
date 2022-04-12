@@ -10,7 +10,7 @@ set fish_cursor_visual      block
 
 fzf_key_bindings
 
-alias ll='exa --long --classify --all --group --git --sort=name'
+alias ll='exa --long --classify --all --group --sort=name'
 alias tree='exa --tree --long --classify --all --group --sort=name -I=".git|.svn"'
 alias cat='bat'
 

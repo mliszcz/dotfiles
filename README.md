@@ -11,6 +11,11 @@ To install (symlink) configuration for a particular package, use the
 ./install.sh ./bash/
 ```
 
+If not provided by the distribution, install fish key bindings for fzf:
+```
+wget -O ~/.config/fish/functions/fzf_key_bindings.fish https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish
+```
+
 ## `git` completion
 
 Bash autocompletion scripts are usually bundled with the `git` package:
