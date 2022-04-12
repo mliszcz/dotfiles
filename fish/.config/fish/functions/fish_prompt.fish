@@ -11,16 +11,19 @@ function __prompt_abort_async_task
         set -l pid $__prompt_async_pid
         functions -e __prompt_async_on_finish_$pid
         command kill $pid >/dev/null 2>&1
-        # Flush the fifo in case something was already written but not yet
-        # received by the 'on_finish' function. Flushing is performed by a
-        # background job. It blocks until all data is read or the writer is
-        # terminated. Only then we can wait for the PID to terminate.
-        # An alternative would be to have a new fifo for each async task.
-        command dd if=$__prompt_fifo > /dev/null 2>&1 &
-        wait $pid
+        set -l fifo_name __prompt_fifo_$pid
+        # Flush the fifo, otherwise tee will hang (why?).
+        command dd if=$$fifo_name > /dev/null 2>&1 &
+        rm -f $$fifo_name
         # Remove the PID variable.
         set -e __prompt_async_pid
     end
+end
+
+
+# Abort the task on shell exit. This is needed to remove the fifo.
+function remove_fifo --on-event fish_exit
+    __prompt_abort_async_task
 end
 
 
@@ -30,18 +33,6 @@ if ! set -q __prompt_is_git
     set -g __prompt_is_git '0'
     or set -g __prompt_is_git_dirty '0'
     set -g __prompt_is_git_status '0'
-end
-
-
-# Create a fifo to communicate with the async task. Using dry-run is safe as we
-# include the shell PID in the template name. The fifo must be deleted once the
-# shell exits.
-if ! set -q __prompt_fifo
-    set -g __prompt_fifo (mktemp --tmpdir --dry-run fish.prompt.fifo.$fish_pid.XXXXXXXXXX)
-    mkfifo $__prompt_fifo
-end
-function remove_fifo --on-event fish_exit
-    rm $__prompt_fifo
 end
 
 
@@ -66,9 +57,13 @@ function __prompt_start_async_task
     # handling async task termination before the on-process-exit handler is set.
     block -l
 
+    # Create fifo for communication between the task and the prompt.
+    set -l fifo (mktemp --tmpdir --dry-run fish.prompt.fifo.$fish_pid.XXXXXXXXXX)
+    mkfifo $fifo
+
     # Workaround for: https://github.com/fish-shell/fish-shell/issues/7422.
     # https://stackoverflow.com/questions/61946995/ls-fifo-blocks-fish-shell
-    command fish --private --command "$__prompt_git_command" | tee $__prompt_fifo >/dev/null 2>&1 &
+    command fish --private --command "$__prompt_git_command" | tee $fifo >/dev/null 2>&1 &
 
     # This is a pair of pids, one for the shell and one for tee.
     set -l pids_list (jobs --last --pid)
@@ -76,13 +71,16 @@ function __prompt_start_async_task
 
     # Set global variable that points to the current async task.
     set -g __prompt_async_pid $pid
+    set -g __prompt_fifo_$pid $fifo
 
     # Set up task completion handler.
-    function __prompt_async_on_finish_$pid --inherit-variable pid --on-process-exit $pid
+    function __prompt_async_on_finish_$pid --inherit-variable pid --inherit-variable fifo --on-process-exit $pid
         functions -e __prompt_async_on_finish_$pid
 
         # Read the task result from the fifo. We expect exactly one line.
-        read -l result < $__prompt_fifo
+        read -l result < $fifo
+        # Fifo is no longer needed and must be removed.
+        rm -f $fifo
 
         # Sanity check. Global PID must exist and it must match
         # the local pid that we inherited from the parent scope.
@@ -143,6 +141,7 @@ function fish_prompt
     # by the statements below. It will be displayed at the end of the prompt.
     set -l last_status $status
 
+    # Block execution of events to avoid data races.
     block -l
 
     # Check if async prompt is requested.
