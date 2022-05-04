@@ -1,0 +1,3 @@
+# Grid without any other style elements results in just two vertical bars,
+# one before and one after the file.
+--style=grid
