@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# This script is intended for sourcing bash files from the fish shell.
+# It is run with bash and then executes into fish again (resulting in
+# a new fish shell running as a subprocess). All exported environment
+# variables will be available in the new shell but functions or other
+# bash-specific constructs will not. Additionally fish_prompt will be
+# updated if the bash script changes PS1.
+# Example usage: source-bash ./activate-sdk.sh
+
+# Clear PS1. Sourced script may prepend something.
+PS1=""
+source "$@"
+
+# All PS1 must be remembered if we source multiple scripts.
+# The original propmt from config file is restored on exec.
+export _SOURCE_BASH_PS1="$PS1$_SOURCE_BASH_PS1"
+
+read -r -d '' fish_init_command <<EOF
+functions -c fish_prompt _source_bash_old_fish_prompt
+function fish_prompt
+  set -l old_status \$status
+  printf "%s%s%s" (set_color 4B8BBE) "$_SOURCE_BASH_PS1" (set_color normal)
+  echo "exit \$old_status" | .
+  _source_bash_old_fish_prompt
+end
+EOF
+
+exec fish --init-command="$fish_init_command"
