@@ -52,13 +52,16 @@ set -g __prompt_git_command '
     end'
 
 
+# Use directory in /run to store the fifo. On some systems /tmp is persistent.
+set -g __prompt_tmp_dir /run/user/(id -u)
+
 function __prompt_start_async_task
     # Block the execution of the event handlers in this function. This prevents
     # handling async task termination before the on-process-exit handler is set.
     block -l
 
     # Create fifo for communication between the task and the prompt.
-    set -l fifo (mktemp --tmpdir --dry-run fish.prompt.fifo.$fish_pid.XXXXXXXXXX)
+    set -l fifo (mktemp --tmpdir="$__prompt_tmp_dir" --dry-run fish.prompt.fifo.$fish_pid.XXXXXXXXXX)
     mkfifo $fifo
 
     # Workaround for: https://github.com/fish-shell/fish-shell/issues/7422.
