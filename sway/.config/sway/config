@@ -6,8 +6,7 @@ set $down j
 set $up k
 set $right l
 
-# TODO: Chekc foot
-set $term kitty
+set $term foot
 
 # Use solid black background for all outputs.
 output * bg #000000 solid_color
@@ -165,9 +164,7 @@ for_window [title="quicklaunch"] \
     floating_maximum_size 900 x 400, \
     border none
 
-# bindsym $mod+d exec kitty --class quicklaunch ~/.config/sway/launcher.sh
-# bindsym $mod+d exec terminator --title quicklaunch -e ~/.config/sway/launcher.sh
-bindsym $mod+d exec alacritty --title quicklaunch -e ~/.config/sway/launcher.sh
+bindsym $mod+d exec foot --title quicklaunch -e ~/.config/sway/launcher.sh
 
 exec --no-startup-id ~/.config/sway/dynamic-workspace-name.sh
 
