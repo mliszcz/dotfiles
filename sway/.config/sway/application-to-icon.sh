@@ -4,6 +4,7 @@ exec sed --unbuffered -e '
   s/kitty//gI
   s/terminator//gI
   s/Alacritty//gI
+  s/foot//gI
   s/cmus//gI
   s/ranger//gI
   s/pcmanfm//gI
@@ -14,6 +15,7 @@ exec sed --unbuffered -e '
   s/zathura//gI
   s/deluge//gI
   s/gimp//gI
+  s/swappy//gI
   s/libreoffice-calc//gI
   s/libreoffice-writer//gI
   s/libreoffice-impress//gI
@@ -21,4 +23,5 @@ exec sed --unbuffered -e '
   s/thunderbird//gI
   s/file-roller//gI
   s/org.qutebrowser.qutebrowser//gI
+  s/luakit//gI
   s/Chromium//gI'
