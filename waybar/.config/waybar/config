@@ -1,61 +1,44 @@
 {
     "_vim_": { "modeline": "/* vim: set filetype=json ts=4 sw=4: */" },
-    "layer": "top",
-    "position": "top",
+    "include": ["/etc/xdg/waybar/config"],
     "height": 24,
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/scratchpad",
+        "sway/window"],
+    "modules-center": [],
     "modules-right": [
         "network#bandwidth",
         "network",
-        "custom/disk",
         "cpu",
         "memory",
+        "custom/disk",
         "temperature",
+        "backlight",
         "battery",
         "pulseaudio",
-        "clock"],
-    "sway/workspaces": {
-        "tooltip": false
-    },
-    "sway/mode": {
-        "tooltip": false,
-        "format": " {}",
-        "max-length": 15
-    },
-    "idle_inhibitor": {
-        "tooltip": false,
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-    "pulseaudio": {
-        "tooltip": false,
-        "format": "{icon} {volume}%",
-        "format-muted": "",
-        "format-icons": {
-            "headphones": "",
-            "default": ["", ""]
-        },
-        "scroll-step": 10,
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-    },
-    "network": {
-        "tooltip": false,
-        "format": " {ifname}",
-        "format-alt": " {ipaddr}",
-        "format-wifi": " {signalStrength:02d}% {essid}",
-        "format-ethernet": " {ifname}",
-        "format-disconnected": " offline",
-        "interval": 30,
-        "max-length": 30
-    },
+        "clock",
+        "tray"],
     "network#bandwidth": {
         "tooltip": false,
         "interval": 10,
         "format": "{bandwidthDownBits} {bandwidthUpBits}"
+    },
+    "network": {
+        "format-wifi": " {signalStrength:02d}% {essid}",
+        "format-ethernet": " {ifname}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": " offline",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "interval": 30
+    },
+    "cpu": {
+        "format": " {usage:02d}%",
+        "tooltip": true
+    },
+    "memory": {
+        "format": " {percentage:02d}%"
     },
     "custom/disk": {
         "tooltip": false,
@@ -63,34 +46,17 @@
         "format": " {}",
         "exec": "~/.config/waybar/disk-usage.sh"
     },
-    "cpu": {
-        "tooltip": false,
-        "interval": 30,
-        "format": " {load:02d}%",
-        "max-length": 10
-    },
-    "memory": {
-        "tooltip": false,
-        "interval": 30,
-        "format": " {0:02d}%",
-        "max-length": 10
-    },
     "temperature": {
-        "tooltip": false,
         "critical-threshold": 50,
-        "interval": 30,
         "format": " {temperatureC:02d}°C"
     },
     "backlight": {
-        "tooltip": false,
-        "device": "intel_backlight",
         "format": "{icon} {percent}%",
-        "on-scroll-up": "light -A 1",
-        "on-scroll-down": "light -U 1",
-        "format-icons": [""]
+        "on-scroll-up": "brightnessctl -q set 5%+",
+        "on-scroll-down": "brightnessctl -q set 5%-",
+        "format-icons": ["🌕", "🌔", "🌓", "🌒", "🌑"]
     },
     "battery": {
-        "tooltip": false,
         "bat": "BAT1",
         "interval": 60,
         "states": {
@@ -102,13 +68,18 @@
         "format": "{icon} {capacity:02d}%",
         "format-alt": "{icon} {time}",
         "format-time": "{H}:{M:02d}",
-        "format-charging": " {capacity:02d}%",
+        "format-charging": " {capacity:02d}%",
         "format-charging-full": "",
         "format-icons": ["", "", "", "", ""],
-        "max-length": 25
+    },
+    "pulseaudio": {
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": "{icon}   {format_source}",
+        "format-source": " {volume}%"
     },
     "clock": {
-        "tooltip": false,
         "interval": 5,
         "format": " {0::%H:%M:%S}",
         "format-alt": " {0:%Y-%m-%d}"
