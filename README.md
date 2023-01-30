@@ -16,6 +16,33 @@ If not provided by the distribution, install fish key bindings for fzf:
 wget -O ~/.config/fish/functions/fzf_key_bindings.fish https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish
 ```
 
+## Firefox
+
+Firefox is not autmation-friendly and is best configured manually.
+
+Install the following pluggins:
+```
+https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
+https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/
+https://addons.mozilla.org/en-US/firefox/addon/enhanced-h264ify/
+```
+
+In `about:config`:
+* `media.av1.enabled` - set to false if hardware decoding is not supported
+* `media.ffmpeg.vaapi.enabled` - set to true if VA-API is enabled
+
+## Luakit
+
+To pull adblock lists run:
+```
+~/.local/share/luakit/adblock/update_lists.sh
+```
+
+I cannot get HW acceleration to work even with:
+```
+env GST_PLUGIN_FEATURE_RANK=vah264dec:MAX,vaapih264dec:NONE,avdec_h264:NONE luakit
+```
+
 ## `git` completion
 
 Bash autocompletion scripts are usually bundled with the `git` package:
@@ -36,7 +63,7 @@ Data is stored locally, but can be accessed via CalDAV/CardDav with `radicale`.
 * Install packages: `radicale`, `khal`, `khard`, `todoman`
 * Create data dirs: `~/.local/share/radicale/collection-root/$USER/{calendar,contacts,tasks}`
 
-# GnuPG
+## GnuPG
 
 ~/.gnupg permissions may need to be changed:
 
