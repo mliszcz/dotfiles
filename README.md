@@ -28,6 +28,7 @@ https://addons.mozilla.org/en-US/firefox/addon/enhanced-h264ify/
 ```
 
 In `about:config`:
+* `browser.download.useDownloadDir` - set to false to always ask for location
 * `media.av1.enabled` - set to false if hardware decoding is not supported
 * `media.ffmpeg.vaapi.enabled` - set to true if VA-API is enabled
 
