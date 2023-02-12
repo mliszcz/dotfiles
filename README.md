@@ -23,8 +23,21 @@ Firefox is not autmation-friendly and is best configured manually.
 Install the following pluggins:
 ```
 https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
+https://addons.mozilla.org/en-US/firefox/addon/fastforwardteam/
+https://addons.mozilla.org/en-US/firefox/addon/buster-captcha-solver/
+https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/
 https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/
 https://addons.mozilla.org/en-US/firefox/addon/enhanced-h264ify/
+```
+
+Userscripts:
+```
+https://adsbypasser.github.io/
+```
+
+uBlock Origin custom filters:
+```
+https://www.reddit.com/r/uBlockOrigin/comments/ze9l0s/shorteners_requires_that_you_stay_on_the_tab/
 ```
 
 In `about:config`:
