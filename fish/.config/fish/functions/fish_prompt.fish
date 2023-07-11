@@ -15,6 +15,8 @@ function __prompt_abort_async_task
         # Flush the fifo, otherwise tee will hang (why?).
         command dd if=$$fifo_name > /dev/null 2>&1 &
         rm -f $$fifo_name
+        # Just in case, kill everything.
+        command kill $__prompt_async_pid_all >/dev/null 2>&1
         # Remove the PID variable.
         set -e __prompt_async_pid
     end
@@ -73,6 +75,7 @@ function __prompt_start_async_task
     set -l pid $pids_list[1]
 
     # Set global variable that points to the current async task.
+    set -g __prompt_async_pid_all $pids_list
     set -g __prompt_async_pid $pid
     set -g __prompt_fifo_$pid $fifo
 
