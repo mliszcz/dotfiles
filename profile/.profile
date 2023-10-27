@@ -22,6 +22,7 @@ fi
 
 if command -v bat >/dev/null; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=\"Solarized (dark)\"'"
+  export MANROFFOPT="-c"
 elif command -v nvim >/dev/null; then
   export MANPAGER='nvim +Man!'
 fi
