@@ -10,8 +10,8 @@ set fish_cursor_visual      block
 
 fzf_key_bindings
 
-alias ll='exa --long --classify --all --group --sort=name'
-alias tree='exa --tree --long --classify --all --group --sort=name -I=".git|.svn"'
+alias ll='eza --long --classify --all --group --sort=name'
+alias tree='eza --tree --long --classify --all --group --sort=name -I=".git|.svn"'
 alias cat='bat'
 
 # CTRL-f completes and executes the autosuggestion.
