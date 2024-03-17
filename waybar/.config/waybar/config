@@ -1,6 +1,6 @@
 {
-    "_vim_": { "modeline": "/* vim: set filetype=json ts=4 sw=4: */" },
-    "include": ["/etc/xdg/waybar/config"],
+    "_vim_": { "modeline": "/* vim: set filetype=jsonc ts=4 sw=4: */" },
+    "include": ["/etc/xdg/waybar/config.jsonc"],
     "height": 24,
     "modules-left": [
         "sway/workspaces",
@@ -21,6 +21,10 @@
         "pulseaudio",
         "clock",
         "tray"],
+    "sway/workspaces": {
+        "window-rewrite": {
+        }
+    },
     "network#bandwidth": {
         "tooltip": false,
         "interval": 10,
@@ -92,7 +96,7 @@
     },
     "clock": {
         "interval": 5,
-        "format": " {0::%H:%M:%S}",
+        "format": " {:%H:%M:%S}",
         "format-alt": " {0:%Y-%m-%d}"
     }
 }
