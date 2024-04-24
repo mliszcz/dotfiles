@@ -30,7 +30,7 @@ for_window [title="quicklaunch"] \
 set $menu foot --title quicklaunch -e ~/.config/sway/launcher.sh
 bindsym --no-warn $mod+d exec $menu
 
-xwayland disable
+xwayland enable
 
 # Hide window title bars and outer borders.
 default_border pixel 2
