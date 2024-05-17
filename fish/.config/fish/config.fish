@@ -21,3 +21,7 @@ bind -s -M insert \cf forward-char execute
 # Allow switching back to a program backgrounded with CTRL-Z.
 bind -s -M default \cz 'fg 2>/dev/null; commandline -f repaint'
 bind -s -M insert  \cz 'fg 2>/dev/null; commandline -f repaint'
+
+# Overwrite the default delete-or-exit behavior for CTRL-D.
+bind -s -M default --erase --preset \cd
+bind -s -M insert  --erase --preset \cd
