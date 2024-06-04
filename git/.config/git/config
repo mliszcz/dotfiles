@@ -3,28 +3,25 @@
     email = liszcz.michal@gmail.com
     signingkey = ABA8CF69F7A2925FB4330C2239ADAE5339E2BAD0
 
-[pager]
-    log = /usr/share/git/diff-highlight/diff-highlight | less -RFX
-    show = /usr/share/git/diff-highlight/diff-highlight | less -RFX
-    diff = /usr/share/git/diff-highlight/diff-highlight | less -RFX
+[core]
+    pager = "type delta >/dev/null 2>&1 && exec delta || exec less -FRX"
 
-# colors are specified using 256 color-codes
-
-[color "diff-highlight"]
-    oldNormal = red
-    oldHighlight = 9 52
-    newNormal = green
-    newHighlight = 10 22
-
-[color "diff"]
-    commit = green
-    meta = yellow
-    frag = cyan
-    old = red
-    new = green
-    whitespace = red reverse
-
-[commit]
+[merge]
+    conflictstyle = diff3
 
 [push]
     gpgSign = if-asked
+
+[branch]
+    sort = committerdate
+
+[diff]
+    colorMoved = default
+    interHunkContext = 20
+    algorithm = patience
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    blame-format = "{timestamp:<18} {author:<15.14} {commit:<8} "
+    blame-timestamp-output-format = "%Y-%m-%d %H:%M"
