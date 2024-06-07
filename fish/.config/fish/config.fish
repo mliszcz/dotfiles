@@ -11,6 +11,10 @@ alias cat='bat'
 
 fish_vi_key_bindings
 
+if type -q fzf
+  fzf --fish | source
+end
+
 # CTRL-f completes and executes the autosuggestion.
 bind -s -M insert \ce forward-char
 bind -s -M insert \cf forward-char execute
@@ -18,11 +22,3 @@ bind -s -M insert \cf forward-char execute
 # Allow switching back to a program backgrounded with CTRL-Z.
 bind -s -M default \cz 'fg 2>/dev/null; commandline -f repaint'
 bind -s -M insert  \cz 'fg 2>/dev/null; commandline -f repaint'
-
-# Overwrite the default delete-or-exit behavior for CTRL-D.
-bind -s -M default --erase --preset \cd
-bind -s -M insert  --erase --preset \cd
-
-if type -q fzf
-  fzf --fish | source
-end
