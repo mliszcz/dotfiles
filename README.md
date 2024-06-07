@@ -11,11 +11,6 @@ To install (symlink) configuration for a particular package, use the
 ./install.sh ./bash/
 ```
 
-If not provided by the distribution, install fish key bindings for fzf:
-```
-wget -O ~/.config/fish/functions/fzf_key_bindings.fish https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.fish
-```
-
 ## Firefox
 
 Firefox is not autmation-friendly and is best configured manually.
