@@ -1,3 +1,5 @@
 CompileFlags:
   Remove:
-    - '-fno-ipa-sra' # clang does not support that
+    # clang does not support these
+    - '-fno-ipa-sra'
+    - '-fno-var-tracking-assignments'
