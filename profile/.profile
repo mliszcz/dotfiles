@@ -12,7 +12,8 @@ fi
 
 if command -v fzf >/dev/null; then
   if command -v fd >/dev/null; then
-    export FZF_DEFAULT_COMMAND='fd --hidden --follow --type f -E ".git/" -E ".svn/" .'
+    export FZF_DEFAULT_COMMAND='fd --hidden --follow --type f --color=always -E .git -E .svn'
+    export FZF_DEFAULT_OPTS="--ansi"
   elif command -v rg >/dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!.svn/*"'
   elif command -v pt >/dev/null; then
