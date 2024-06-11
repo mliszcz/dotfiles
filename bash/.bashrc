@@ -7,9 +7,16 @@ alias ll='ls --color=auto -lah'
 PS1='[\u@\h \W]\$ '
 
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash_history"
-HISTSIZE=-1
-HISTFILESIZE=-1
 HISTCONTROL=ignoreboth:erasedups
+
+if [ "${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}" -ge 43 ]
+then
+  HISTSIZE=-1
+  HISTFILESIZE=-1
+else
+  HISTSIZE=
+  HISTFILESIZE=
+fi
 
 shopt -s histappend
 shopt -s globstar
