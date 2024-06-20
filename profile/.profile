@@ -1,4 +1,5 @@
 export LESS="--HILITE-UNREAD --ignore-case --RAW-CONTROL-CHARS -M"
+export LESSHISTFILE=-
 
 export MOZ_ENABLE_WAYLAND=1
 
