@@ -21,3 +21,7 @@ fi
 shopt -s histappend
 shopt -s globstar
 shopt -s checkwinsize
+
+if command -v fzf >/dev/null; then
+  eval "$(fzf --bash)"
+fi

@@ -15,6 +15,13 @@ if type -q fzf
   fzf --fish | source
 end
 
+# Use $dir to narrow CTRL-t search results to start with what is already typed.
+# Note: this variable is provided by the fzf extension only for the fish shell.
+# It cannot go into .profile because it would break bash.
+if type -q fzf; and type -q fd; and set -q FZF_DEFAULT_COMMAND
+  set -g FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND --search-path \$dir"
+end
+
 # CTRL-f completes and executes the autosuggestion.
 bind -s -M insert \ce forward-char
 bind -s -M insert \cf forward-char execute
