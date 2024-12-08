@@ -40,18 +40,6 @@ hide_edge_borders both
 bindsym Mod1+Tab workspace back_and_forth
 bindsym Mod1+Shift+Tab workspace back_and_forth
 
-# Special keys (https://wiki.archlinux.org/title/sway#Custom_keybindings)
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86Search exec $menu
-
 # Toggle waybar visibility.
 bindsym $mod+x exec killall -SIGUSR1 waybar
 
@@ -59,8 +47,10 @@ bindsym $mod+x exec killall -SIGUSR1 waybar
 # https://help.gnome.org/users/gnome-help/stable/screen-shot-record.html.en
 # Note: On Anne 2 Pro the Print key is mapped to FN2+P. Shift/Ctrl modifier
 # keys must be pressed before FN2+P is pressed, otherwise they are ignored.
+# The print mapping without any modifiers is already present in the default
+# configuration, it is left here with --no-warn option just for symmetry.
 set $print Print
-bindsym $print exec grim
+bindsym --no-warn $print exec grim
 bindsym Mod1+$print exec grim -g "$(~/.config/sway/get-active-window-position.sh)"
 bindsym Shift+$print exec grim -g "$(slurp -d)"
 bindsym Control+$print exec grim - | wl-copy
