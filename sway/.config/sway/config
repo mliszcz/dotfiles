@@ -94,5 +94,3 @@ exec swayidle \
 # present in the system and already took 'org.freedesktop.Notifications' name
 # mako will not start anyway.
 # exec mako
-
-exec ~/.config/sway/dynamic-workspace-name.sh

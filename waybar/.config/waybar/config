@@ -22,7 +22,29 @@
         "clock",
         "tray"],
     "sway/workspaces": {
+        "format": "{index}: {windows}",
+        "window-format": "https://github.com/Alexays/Waybar/issues/3797",
         "window-rewrite": {
+            "class<foot>": "",
+            "class<foot> title<.*cmus.*>": "",
+            "class<foot> title<.*ranger.*>": "",
+            "class<pcmanfm>": "",
+            "class<firefox>": "",
+            "class<mpv>": "",
+            "class<imv>": "",
+            "class<zathura>": "",
+            "class<deluge>": "",
+            "class<gimp>": "",
+            "class<swappy>": "",
+            "class<libreoffice-calc>": "",
+            "class<libreoffice-writer>": "",
+            "class<libreoffice-impress>": "",
+            "class<gedit>": "",
+            "class<thunderbird>": "",
+            "class<file-roller>": "",
+            "class<org.qutebrowser.qutebrowser>": "",
+            "class<luakit>": "",
+            "class<chromium>": ""
         }
     },
     "network#bandwidth": {
