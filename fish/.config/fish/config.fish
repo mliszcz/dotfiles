@@ -5,6 +5,8 @@ set fish_cursor_insert      line       blink
 set fish_cursor_replace_one underscore blink
 set fish_cursor_visual      block
 
+set fish_color_command blue
+
 alias ll='eza --long --classify --all --group --sort=name'
 alias tree='eza --tree --long --classify --all --group --sort=name -I=".git|.svn"'
 alias cat='bat'
