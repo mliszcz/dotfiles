@@ -1,6 +1,7 @@
 # Prompt with (possibly asynchronous) git status.
 # The async communication is inspired by the implementation of the lucid prompt:
 # https://github.com/mattgreen/lucid.fish/blob/master/functions/fish_prompt.fish
+# To enable: set -U prompt_use_async_git_status
 
 
 # Stop the asynchronous task. Presence of the __prompt_async_pid variable

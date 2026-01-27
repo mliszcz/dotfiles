@@ -7,7 +7,7 @@ set fish_cursor_visual      block
 
 set fish_color_command blue
 
-alias ll='eza --long --classify --all --group --sort=name'
+alias ll='eza --long --classify --all --group --sort=name --icons --group-directories-first'
 alias tree='eza --tree --long --classify --all --group --sort=name -I=".git|.svn"'
 alias cat='bat'
 
